@@ -1,6 +1,6 @@
 package com.aurawave.domain.enumerated;
 
-public enum MaterialStatus {
+public enum ItemStatus {
     AVALIABLE,
     UNAVAILABLE
 }

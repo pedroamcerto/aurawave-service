@@ -4,13 +4,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Controladora responsável pela gestão dos laboratórios (unidades laboratoriais).
+ * Controladora responsável pela gestão dos almoxarifados.
  *
  */
 
 @RestController
-@RequestMapping("/api/laboratory")
-public class laboratoryController {
+@RequestMapping("/api/warehouse")
+public class WarehouseController {
 
 
 }

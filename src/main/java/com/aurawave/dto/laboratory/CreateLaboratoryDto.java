@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class CreateLaboratory {
+public class CreateLaboratoryDto {
     private Long id;
 
     private String name;
