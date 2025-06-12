@@ -57,9 +57,9 @@ public class LaboratoryService implements ServiceInterface<GetLaboratoryDto, Cre
      */
     @Override
     public GetLaboratoryDto getById(Long id) {
-        Laboratory laboratory = laboratoryRepository.findById(id).orElseThrow(
-                () -> new NotFoundException("Laboratório não encontrado"));
-        return modelMapper.map(laboratory, GetLaboratoryDto.class);
+        Laboratory laboratory = laboratoryRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Laboratório não encontrado"));
+        return modelMapper.map(laboratory, GetLaboratoryDto.class);  // Mapeamento para DTO
     }
 
     /**

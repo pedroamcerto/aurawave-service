@@ -13,9 +13,8 @@ public class GetLaboratoryDto {
     private Long id;
     private String name;
     private String address;
-    private List<GetWarehouseDto> warehouses;
+    private List<GetWarehouseDto> warehouses;  // Referência para a lista de almoxarifados
 
-    // Adicionando os campos de auditoria
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 }

@@ -1,10 +1,13 @@
 package com.aurawave.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -13,6 +16,7 @@ import java.util.List;
  */
 @Entity(name = "laboratory")
 @Getter @Setter @NoArgsConstructor
+@JsonIgnoreProperties({"warehouses"})
 public class Laboratory extends Auditable {
 
     @Id
@@ -25,6 +29,7 @@ public class Laboratory extends Auditable {
     @Column(name = "address")
     private String address;
 
-    @OneToMany(mappedBy = "laboratory")
+    @OneToMany(mappedBy = "laboratory", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference  // Anotação para evitar a recursão infinita na serialização
     private List<Warehouse> warehouses;
 }

@@ -4,11 +4,13 @@ import com.aurawave.core.exception.NotFoundException;
 import com.aurawave.domain.enumerated.ItemStatus;
 import com.aurawave.domain.interfaces.ServiceInterface;
 import com.aurawave.domain.model.Item;
+import com.aurawave.domain.model.Laboratory;
 import com.aurawave.domain.model.Warehouse;
 import com.aurawave.dto.laboratory.GetLaboratoryDto;
 import com.aurawave.dto.warehouse.CreateWarehouseDto;
 import com.aurawave.dto.warehouse.GetWarehouseDto;
 import com.aurawave.repository.ItemRepository;
+import com.aurawave.repository.LaboratoryRepository;
 import com.aurawave.repository.WarehouseRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +26,10 @@ public class WarehouseService implements ServiceInterface<GetWarehouseDto, Creat
     private WarehouseRepository warehouseRepository;
 
     @Autowired
-    private ItemRepository itemRepository;
+    private LaboratoryRepository laboratoryRepository;
 
     @Autowired
-    private LaboratoryService laboratoryService;
+    private ItemRepository itemRepository;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -39,26 +41,16 @@ public class WarehouseService implements ServiceInterface<GetWarehouseDto, Creat
      */
     @Override
     public void create(CreateWarehouseDto createWarehouseDto) {
-        if (!returnLaboratoryId(createWarehouseDto)) {
-            throw new NotFoundException("Laboratório não encontrado");
-        }
+        // Passo 1: Buscar o laboratório pelo ID
+        Laboratory laboratory = laboratoryRepository.findById(createWarehouseDto.getLaboratoryId())
+                .orElseThrow(() -> new NotFoundException("Laboratório não encontrado"));
 
+        // Passo 2: Criar o Warehouse e associar ao Laboratory
         Warehouse warehouse = modelMapper.map(createWarehouseDto, Warehouse.class);
-        warehouseRepository.save(warehouse);
-    }
+        warehouse.setLaboratory(laboratory);  // Associando o Warehouse ao Laboratory
 
-    /**
-     * Verifica se o laboratório está presente e retorna o ID.
-     *
-     * @param createWarehouseDto O DTO com os dados do almoxarifado.
-     * @return boolean indicando se o laboratório existe.
-     */
-    private boolean returnLaboratoryId(CreateWarehouseDto createWarehouseDto) {
-        return Optional.ofNullable(createWarehouseDto)
-                .map(CreateWarehouseDto::getLaboratory)
-                .map(GetLaboratoryDto::getId)
-                .map(laboratoryService::getById)
-                .isPresent();
+        // Passo 3: Salvar o Warehouse
+        warehouseRepository.save(warehouse);
     }
 
     /**
@@ -117,6 +109,7 @@ public class WarehouseService implements ServiceInterface<GetWarehouseDto, Creat
 
         warehouse.getItems().add(item);
         warehouseRepository.save(warehouse);
+        itemRepository.save(item);
     }
 
     /**

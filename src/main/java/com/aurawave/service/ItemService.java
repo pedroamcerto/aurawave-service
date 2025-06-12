@@ -86,7 +86,7 @@ public class ItemService implements ServiceInterface<GetItemDto, CreateItemDto> 
         if (!status.equals(ItemStatus.DAMAGED) || !status.equals(ItemStatus.EXPIRED) || !status.equals(ItemStatus.DISCARDED)) {
             throw new IllegalArgumentException("Item não pode ser atualizado com esse status");
         }
-        
+
         item.setStatus(status);
         itemRepository.save(item);
     }

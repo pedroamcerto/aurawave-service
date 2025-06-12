@@ -1,6 +1,6 @@
 package com.aurawave.core.audit;
 
-import io.micrometer.common.lang.NonNull;
+import lombok.NonNull;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.stereotype.Component;
 
@@ -10,5 +10,7 @@ import java.util.Optional;
 public class AuditorAwareImpl implements AuditorAware<String> {
     @Override
     @NonNull
-    public Optional<String> getCurrentAuditor() { return Optional.of("user"); }
+    public Optional<String> getCurrentAuditor() {
+        return Optional.of("user");
+    }
 }
