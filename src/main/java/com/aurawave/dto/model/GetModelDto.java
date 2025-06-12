@@ -1,6 +1,6 @@
-package com.aurawave.dto.warehouse;
+package com.aurawave.dto.model;
 
-import com.aurawave.domain.model.Laboratory;
+import com.aurawave.domain.model.Product;
 import com.aurawave.dto.item.GetItemDto;
 import lombok.Data;
 
@@ -8,12 +8,13 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * DTO para obter dados de um almoxarifado.
+ * DTO para obter dados de um modelo.
  */
 @Data
-public class GetWarehouseDto {
+public class GetModelDto {
     private Long id;
-    private Laboratory laboratory;
+    private String name;
+    private Product product;
     private List<GetItemDto> items;
 
     private LocalDateTime createdDate;

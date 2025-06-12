@@ -6,6 +6,7 @@ import com.aurawave.domain.model.Laboratory;
 import com.aurawave.dto.laboratory.CreateLaboratoryDto;
 import com.aurawave.dto.laboratory.GetLaboratoryDto;
 import com.aurawave.repository.LaboratoryRepository;
+import com.aurawave.repository.WarehouseRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,15 +32,15 @@ public class LaboratoryService implements ServiceInterface<GetLaboratoryDto, Cre
     private LaboratoryRepository laboratoryRepository;
 
     @Autowired
+    private WarehouseRepository warehouseRepository;
+
+    @Autowired
     private ModelMapper modelMapper;
 
     /**
-     * Cria um novo laboratório a partir de um DTO de criação.
+     * Cria um novo laboratório.
      *
-     * Este método mapeia os dados do {@link CreateLaboratoryDto} para a entidade
-     * {@link Laboratory} e a persiste no banco de dados.
-     *
-     * @param createLaboratoryDto DTO contendo os dados necessários para a criação de um laboratório.
+     * @param createLaboratoryDto DTO contendo os dados do laboratório a ser criado.
      */
     @Override
     public void create(CreateLaboratoryDto createLaboratoryDto) {
@@ -50,12 +51,8 @@ public class LaboratoryService implements ServiceInterface<GetLaboratoryDto, Cre
     /**
      * Recupera um laboratório pelo seu ID.
      *
-     * Este método busca um laboratório no banco de dados pelo ID e o mapeia para um DTO
-     * de resposta. Caso o laboratório não seja encontrado, uma {@link NotFoundException}
-     * será lançada.
-     *
      * @param id O ID do laboratório a ser recuperado.
-     * @return Um {@link GetLaboratoryDto} contendo os dados do laboratório.
+     * @return O DTO com os dados do laboratório.
      * @throws NotFoundException Se o laboratório não for encontrado no banco de dados.
      */
     @Override
@@ -68,15 +65,26 @@ public class LaboratoryService implements ServiceInterface<GetLaboratoryDto, Cre
     /**
      * Recupera todos os laboratórios cadastrados no banco de dados.
      *
-     * Este método recupera todos os laboratórios do banco de dados, mapeia cada um deles
-     * para o DTO {@link GetLaboratoryDto} e retorna a lista.
-     *
-     * @return Uma lista de {@link GetLaboratoryDto} contendo os dados de todos os laboratórios.
+     * @return Uma lista de DTOs com os dados de todos os laboratórios.
      */
     @Override
     public List<GetLaboratoryDto> getAll() {
         return laboratoryRepository.findAll().stream()
                 .map(laboratory -> modelMapper.map(laboratory, GetLaboratoryDto.class))
                 .toList();
+    }
+
+    /**
+     * Deleta um laboratório pelo seu ID. Se um laboratório for deletado, os almoxarifados associados a ele serão deletados também.
+     *
+     * @param id O ID do laboratório a ser deletado.
+     */
+    @Override
+    public void delete(Long id) {
+        Laboratory laboratory = laboratoryRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Laboratório não encontrado"));
+
+        warehouseRepository.deleteAll(laboratory.getWarehouses());
+        laboratoryRepository.delete(laboratory);
     }
 }

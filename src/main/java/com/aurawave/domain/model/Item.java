@@ -6,12 +6,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
+/**
+ * Classe representando um item no sistema.
+ * Herda os campos de auditoria de {@link Auditable}.
+ */
 @Entity(name = "item")
 @Getter @Setter @NoArgsConstructor
-public class Item extends Auditable{
+public class Item extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,9 +20,6 @@ public class Item extends Auditable{
 
     @Column(name = "name")
     private String name;
-
-    @Column(name = "emmit_date")
-    private LocalDateTime emmitDate;
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
@@ -32,6 +30,5 @@ public class Item extends Auditable{
     private Model model;
 
     @ManyToOne
-    private List<Warehouse> warehouses;
-
+    private Warehouse warehouses;
 }

@@ -7,9 +7,13 @@ import lombok.Setter;
 
 import java.util.List;
 
+/**
+ * Classe representando um produto.
+ * Herda os campos de auditoria de {@link Auditable}.
+ */
 @Entity(name = "product")
 @Getter @Setter @NoArgsConstructor
-public class Product {
+public class Product extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
