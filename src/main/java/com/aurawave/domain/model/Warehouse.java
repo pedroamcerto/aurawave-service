@@ -19,6 +19,6 @@ public class Warehouse {
     @JoinColumn(name = "laboratory_id")
     private Laboratory laboratory;
 
-    @ManyToMany(mappedBy = "warehouses")
+    @OneToMany(mappedBy = "warehouses")
     private List<Item> items;
 }

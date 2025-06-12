@@ -1,9 +1,6 @@
 package com.aurawave.dto.laboratory;
 
-import com.aurawave.domain.model.Warehouse;
 import lombok.Data;
-
-import java.util.List;
 
 @Data
 public class CreateLaboratoryDto {
@@ -13,5 +10,4 @@ public class CreateLaboratoryDto {
 
     private String address;
 
-    private List<Warehouse> warehouses;
 }
