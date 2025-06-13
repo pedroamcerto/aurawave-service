@@ -1,4 +1,4 @@
-![Aurawave Logo](.assets/Domain Driven Desing - CHALLENGE.png)
+![Aurawave Logo](./assets/Domain Driven Desing - CHALLENGE.png)
 ---
 # Aurawave Service
 Obs: Este documento te ajudará a corrigir esta tarefa.
