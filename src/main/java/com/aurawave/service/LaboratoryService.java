@@ -7,8 +7,8 @@ import com.aurawave.dto.laboratory.CreateLaboratoryDto;
 import com.aurawave.dto.laboratory.GetLaboratoryDto;
 import com.aurawave.repository.LaboratoryRepository;
 import com.aurawave.repository.WarehouseRepository;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,16 +26,14 @@ import java.util.List;
  * @see ModelMapper
  */
 @Service
+@RequiredArgsConstructor
 public class LaboratoryService implements ServiceInterface<GetLaboratoryDto, CreateLaboratoryDto> {
 
-    @Autowired
-    private LaboratoryRepository laboratoryRepository;
+    private final LaboratoryRepository laboratoryRepository;
+    private final WarehouseRepository warehouseRepository;
+    private final ModelMapper modelMapper;
 
-    @Autowired
-    private WarehouseRepository warehouseRepository;
-
-    @Autowired
-    private ModelMapper modelMapper;
+    private static final String NOT_FOUND_MESSAGE = "Laboratorio não encontrado";
 
     /**
      * Cria um novo laboratório.
@@ -58,8 +56,8 @@ public class LaboratoryService implements ServiceInterface<GetLaboratoryDto, Cre
     @Override
     public GetLaboratoryDto getById(Long id) {
         Laboratory laboratory = laboratoryRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Laboratório não encontrado"));
-        return modelMapper.map(laboratory, GetLaboratoryDto.class);  // Mapeamento para DTO
+                .orElseThrow(() -> new NotFoundException(NOT_FOUND_MESSAGE));
+        return modelMapper.map(laboratory, GetLaboratoryDto.class);
     }
 
     /**
@@ -72,19 +70,5 @@ public class LaboratoryService implements ServiceInterface<GetLaboratoryDto, Cre
         return laboratoryRepository.findAll().stream()
                 .map(laboratory -> modelMapper.map(laboratory, GetLaboratoryDto.class))
                 .toList();
-    }
-
-    /**
-     * Deleta um laboratório pelo seu ID. Se um laboratório for deletado, os almoxarifados associados a ele serão deletados também.
-     *
-     * @param id O ID do laboratório a ser deletado.
-     */
-    @Override
-    public void delete(Long id) {
-        Laboratory laboratory = laboratoryRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Laboratório não encontrado"));
-
-        warehouseRepository.deleteAll(laboratory.getWarehouses());
-        laboratoryRepository.delete(laboratory);
     }
 }

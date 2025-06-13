@@ -1,6 +1,6 @@
 package com.aurawave.dto.laboratory;
 
-import com.aurawave.dto.warehouse.GetWarehouseDto;
+import com.aurawave.dto.warehouse.GetLaboratoryWarehouseDto;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -13,8 +13,8 @@ public class GetLaboratoryDto {
     private Long id;
     private String name;
     private String address;
-    private List<GetWarehouseDto> warehouses;  // Referência para a lista de almoxarifados
+    private List<GetLaboratoryWarehouseDto> warehouses;
 
     private LocalDateTime createdDate;
-    private LocalDateTime modifiedDate;
+    private LocalDateTime modifyDate;
 }

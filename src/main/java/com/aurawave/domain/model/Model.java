@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -24,10 +23,9 @@ public class Model extends Auditable {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
     private Product product;
 
-    @ManyToOne
-    @JoinColumn(name = "model_id")
-    private Model model;
+    @OneToMany(mappedBy = "model")
+    private List<Item> items;
 }

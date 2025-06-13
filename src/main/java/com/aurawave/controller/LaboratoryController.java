@@ -55,17 +55,4 @@ public class LaboratoryController {
         List<GetLaboratoryDto> laboratories = laboratoryService.getAll();
         return new ResponseEntity<>(laboratories, HttpStatus.OK);
     }
-
-    /**
-     * Deleta um laboratório pelo seu ID.
-     * Se o laboratório for deletado, os almoxarifados associados a ele serão deletados também.
-     *
-     * @param id ID do laboratório a ser deletado.
-     * @return Status HTTP indicando que o laboratório foi deletado.
-     */
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteLaboratory(@PathVariable Long id) {
-        laboratoryService.delete(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
 }

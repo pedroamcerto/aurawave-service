@@ -7,14 +7,10 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
-/**
- * DTO para obter dados de um almoxarifado.
- */
 @Data
-public class GetWarehouseDto {
+public class GetModelWarehouseDto {
     private Long id;
     private GetWarehouseLaboratoryDto laboratory;
-    private List<GetWarehouseItemDto> items;
 
     private LocalDateTime createdDate;
     private LocalDateTime modifyDate;

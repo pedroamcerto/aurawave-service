@@ -6,8 +6,9 @@ import com.aurawave.domain.model.Model;
 import com.aurawave.dto.model.CreateModelDto;
 import com.aurawave.dto.model.GetModelDto;
 import com.aurawave.repository.ModelRepository;
+import com.aurawave.repository.ProductRepository;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,13 +20,14 @@ import java.util.stream.Collectors;
  * atualização, remoção e busca de modelos.
  */
 @Service
+@RequiredArgsConstructor
 public class ModelService implements ServiceInterface<GetModelDto, CreateModelDto> {
 
-    @Autowired
-    private ModelRepository modelRepository;
+    private final ModelRepository modelRepository;
+    private final ProductRepository productRepository;
+    private final ModelMapper modelMapper;
 
-    @Autowired
-    private ModelMapper modelMapper;
+    private static final String NOT_FOUND_MESSAGE = "Model não encotrado";
 
     /**
      * Cria um novo modelo.
@@ -33,26 +35,14 @@ public class ModelService implements ServiceInterface<GetModelDto, CreateModelDt
      * Este método mapeia o DTO de entrada {@link CreateModelDto} para a entidade Model
      * e persiste o novo modelo no banco de dados.
      *
-     * @param entity O DTO contendo os dados do modelo a ser criado.
+     * @param createModelDto O DTO contendo os dados do modelo a ser criado.
      */
     @Override
-    public void create(CreateModelDto entity) {
-        Model model = modelMapper.map(entity, Model.class);
-        modelRepository.save(model);
-    }
+    public void create(CreateModelDto createModelDto) {
+        productRepository.findById(createModelDto.getProduct().getId())
+                .orElseThrow(() -> new NotFoundException(NOT_FOUND_MESSAGE));
 
-    /**
-     * Atualiza um modelo existente.
-     *
-     * Este método busca o modelo por ID, atualiza seus dados e salva as mudanças no banco de dados.
-     *
-     * @param id O ID do modelo a ser atualizado.
-     * @param entity O DTO com os dados atualizados do modelo.
-     */
-    @Override
-    public void update(Long id, CreateModelDto entity) {
-        Model model = modelRepository.findById(id).orElseThrow(() -> new NotFoundException("Modelo não encontrado"));
-        modelMapper.map(entity, model);
+        Model model = modelMapper.map(createModelDto, Model.class);
         modelRepository.save(model);
     }
 
@@ -66,7 +56,7 @@ public class ModelService implements ServiceInterface<GetModelDto, CreateModelDt
      */
     @Override
     public GetModelDto getById(Long id) {
-        Model model = modelRepository.findById(id).orElseThrow(() -> new NotFoundException("Modelo não encontrado"));
+        Model model = modelRepository.findById(id).orElseThrow(() -> new NotFoundException(NOT_FOUND_MESSAGE));
         return modelMapper.map(model, GetModelDto.class);
     }
 

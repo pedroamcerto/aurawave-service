@@ -1,11 +1,8 @@
 package com.aurawave.domain.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.List;
 
@@ -14,7 +11,7 @@ import java.util.List;
  * Herda os campos de auditoria de {@link Auditable}.
  */
 @Entity(name = "warehouse")
-@Getter @Setter @NoArgsConstructor
+@Data
 @JsonIgnoreProperties({"laboratory"})
 public class Warehouse extends Auditable {
 
@@ -23,10 +20,9 @@ public class Warehouse extends Auditable {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "laboratory_id")
-    @JsonBackReference  // Anotação para indicar que esta é a "referência de volta", prevenindo a recursão infinita
+    @JoinColumn(name = "laboratory_id", referencedColumnName = "id")
     private Laboratory laboratory;
 
-    @OneToMany(mappedBy = "warehouse", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "warehouse")
     private List<Item> items;
 }

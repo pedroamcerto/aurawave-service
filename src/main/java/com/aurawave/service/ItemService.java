@@ -6,9 +6,12 @@ import com.aurawave.domain.interfaces.ServiceInterface;
 import com.aurawave.domain.model.Item;
 import com.aurawave.dto.item.CreateItemDto;
 import com.aurawave.dto.item.GetItemDto;
+import com.aurawave.dto.item.UpdateItemStatusDto;
 import com.aurawave.repository.ItemRepository;
+import com.aurawave.repository.ModelRepository;
+import com.aurawave.repository.WarehouseRepository;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,13 +28,15 @@ import java.util.stream.Collectors;
  * @see ModelMapper
  */
 @Service
+@RequiredArgsConstructor
 public class ItemService implements ServiceInterface<GetItemDto, CreateItemDto> {
 
-    @Autowired
-    private ItemRepository itemRepository;
+    private final ItemRepository itemRepository;
+    private final ModelRepository modelRepository;
+    private final WarehouseRepository warehouseRepository;
+    private final ModelMapper modelMapper;
 
-    @Autowired
-    private ModelMapper modelMapper;
+        private static final String NOT_FOUND_MESSAGE = "Item não encontrado";
 
     /**
      * Cria um novo item.
@@ -43,9 +48,15 @@ public class ItemService implements ServiceInterface<GetItemDto, CreateItemDto> 
      */
     @Override
     public void create(CreateItemDto createItemDto) {
+        modelRepository.findById(createItemDto.getModel().getId())
+                .orElseThrow(() -> new NotFoundException("Modelo não encontrado"));
+
+        warehouseRepository.findById(createItemDto.getWarehouse().getId())
+                .orElseThrow(() -> new NotFoundException("Almoxarifado não encontrado"));
+
         Item item = modelMapper.map(createItemDto, Item.class);
 
-        item.setStatus(ItemStatus.OUT_OF_STOCK);
+        item.setStatus(ItemStatus.AVALIABLE);
         itemRepository.save(item);
     }
 
@@ -62,9 +73,9 @@ public class ItemService implements ServiceInterface<GetItemDto, CreateItemDto> 
     @Override
     public void update(Long id, CreateItemDto createItemDto) {
         Item item = itemRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Item não encontrado"));
+                .orElseThrow(() -> new NotFoundException(NOT_FOUND_MESSAGE));
 
-        modelMapper.map(createItemDto, item);
+        item.setName(createItemDto.getName());
         itemRepository.save(item);
     }
 
@@ -75,22 +86,21 @@ public class ItemService implements ServiceInterface<GetItemDto, CreateItemDto> 
      * {@link ItemStatus} e atualiza os dados do item no banco de dados.
      *
      * @param id O ID do item a ser atualizado.
-     * @param status status de um item que ainda não está em um almoxarifado pode ser alterado.
+     * @param updateItemStatusDto status de um item que ainda não está em um almoxarifado pode ser alterado.
      * @throws NotFoundException Se o item com o ID fornecido não for encontrado.
      */
     @Override
-    public void update(Long id, ItemStatus status) {
+    public void update(Long id, UpdateItemStatusDto updateItemStatusDto) {
         Item item = itemRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Item não encontrado"));
+                .orElseThrow(() -> new NotFoundException(NOT_FOUND_MESSAGE));
 
-        if (!status.equals(ItemStatus.DAMAGED) || !status.equals(ItemStatus.EXPIRED) || !status.equals(ItemStatus.DISCARDED)) {
+        if (!item.getStatus().equals(ItemStatus.AVALIABLE)) {
             throw new IllegalArgumentException("Item não pode ser atualizado com esse status");
         }
 
-        item.setStatus(status);
+        item.setStatus(updateItemStatusDto.getStatus());
         itemRepository.save(item);
     }
-
     /**
      * Recupera um item pelo seu ID.
      *
@@ -104,7 +114,7 @@ public class ItemService implements ServiceInterface<GetItemDto, CreateItemDto> 
     @Override
     public GetItemDto getById(Long id) {
         Item item = itemRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Item não encontrado"));
+                .orElseThrow(() -> new NotFoundException(NOT_FOUND_MESSAGE));
         return modelMapper.map(item, GetItemDto.class);
     }
 
@@ -120,7 +130,6 @@ public class ItemService implements ServiceInterface<GetItemDto, CreateItemDto> 
     public List<GetItemDto> getAll() {
         return itemRepository.findAll().stream()
                 .map(item -> modelMapper.map(item, GetItemDto.class))
-                .collect(Collectors.toList());
+                .toList();
     }
-
 }

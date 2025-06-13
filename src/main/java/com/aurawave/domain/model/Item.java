@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
-
 /**
  * Classe representando um item no sistema.
  * Herda os campos de auditoria de {@link Auditable}.
@@ -24,7 +22,7 @@ public class Item extends Auditable {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "warehouse_id") // Relacionamento com Warehouse
+    @JoinColumn(name = "warehouse_id", referencedColumnName = "id")
     private Warehouse warehouse;
 
     @Enumerated(EnumType.STRING)
@@ -32,6 +30,6 @@ public class Item extends Auditable {
     private ItemStatus status;
 
     @ManyToOne
-    @JoinColumn(name = "model_id")
-    private Model model; // Relacionamento com o modelo de produto
+    @JoinColumn(name = "model_id", referencedColumnName = "id")
+    private Model model;
 }

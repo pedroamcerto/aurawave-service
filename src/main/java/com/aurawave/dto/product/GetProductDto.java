@@ -1,6 +1,5 @@
 package com.aurawave.dto.product;
 
-import com.aurawave.dto.model.GetModelDto;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -13,8 +12,8 @@ import java.util.List;
 public class GetProductDto {
     private Long id;
     private String name;
-    private List<GetModelDto> models;
+    private List<GetModelProductDto> models;
 
     private LocalDateTime createdDate;
-    private LocalDateTime modifiedDate;
+    private LocalDateTime modifyDate;
 }
