@@ -1,0 +1,564 @@
+{
+	"info": {
+		"_postman_id": "fff94605-021b-4762-bb3d-af4a7045fedb",
+		"name": "Aurawave",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38230679"
+	},
+	"item": [
+		{
+			"name": "Laboratory",
+			"item": [
+				{
+					"name": "http://localhost:8080/api/laboratories",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n           \"name\": \"Laboratório 1\",\r\n           \"address\": \"Endereço do laboratório\"\r\n         }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/laboratories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"laboratories"
+							]
+						},
+						"description": "Generated from cURL: curl -X POST \"http://localhost:8080/api/laboratories\" \\\r\n     -H \"Content-Type: application/json\" \\\r\n     -d '{\r\n           \"name\": \"Laboratório 1\",\r\n           \"address\": \"Endereço do laboratório\"\r\n         }'"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/api/laboratories/1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/laboratories/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"laboratories",
+								"1"
+							]
+						},
+						"description": "Generated from cURL: curl -X GET \"http://localhost:8080/api/laboratories/1\"\r\n"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/api/laboratories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/laboratories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"laboratories"
+							]
+						},
+						"description": "Generated from cURL: curl -X GET \"http://localhost:8080/api/laboratories\"\r\n"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Warehouse",
+			"item": [
+				{
+					"name": "http://localhost:8080/api/warehouse",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"laboratory\": {\r\n        \"id\": 1,\r\n        \"name\": \"Laboratório A\",\r\n        \"address\": \"Rua Exemplo, 123\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/warehouse",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"warehouse"
+							]
+						},
+						"description": "Generated from cURL: curl -X POST \"http://localhost:8080/api/warehouse\" -H \"Content-Type: application/json\" -d '{\r\n    \"id\": 1,\r\n    \"laboratory\": {\r\n        \"id\": 1,\r\n        \"name\": \"Laboratório A\",\r\n        \"address\": \"Rua Exemplo, 123\"\r\n    }\r\n}'\r\n"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/api/warehouse/1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/warehouse/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"warehouse",
+								"1"
+							]
+						},
+						"description": "Generated from cURL: curl -X GET \"http://localhost:8080/api/warehouse/1\"\r\n"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/api/warehouse",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/warehouse",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"warehouse"
+							]
+						},
+						"description": "Generated from cURL: curl -X GET \"http://localhost:8080/api/warehouse\"\r\n"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "http://localhost:8080/api/product",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n           \"name\": \"Produto Exemplo\",\r\n           \"description\": \"Descrição do produto\",\r\n           \"price\": 99.99,\r\n           \"stock\": 10\r\n         }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/product",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"product"
+							]
+						},
+						"description": "Generated from cURL: curl -X POST \"http://localhost:8080/api/product\" \\\r\n     -H \"Content-Type: application/json\" \\\r\n     -d '{\r\n           \"name\": \"Produto Exemplo\",\r\n           \"description\": \"Descrição do produto\",\r\n           \"price\": 99.99,\r\n           \"stock\": 10\r\n         }'\r\n"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/api/product/1",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/product/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"product",
+								"1"
+							]
+						},
+						"description": "Generated from cURL: curl -X GET \"http://localhost:8080/api/product/1\" \\\r\n     -H \"Content-Type: application/json\"\r\n"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/api/product",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/product",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"product"
+							]
+						},
+						"description": "Generated from cURL: curl -X GET \"http://localhost:8080/api/product\" \\\r\n     -H \"Content-Type: application/json\"\r\n"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/api/product/1",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n           \"name\": \"Produto Atualizado\",\r\n           \"description\": \"Descrição atualizada\",\r\n           \"price\": 109.99,\r\n           \"stock\": 20\r\n         }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/product/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"product",
+								"1"
+							]
+						},
+						"description": "Generated from cURL: curl -X PUT \"http://localhost:8080/api/product/1\" \\\r\n     -H \"Content-Type: application/json\" \\\r\n     -d '{\r\n           \"name\": \"Produto Atualizado\",\r\n           \"description\": \"Descrição atualizada\",\r\n           \"price\": 109.99,\r\n           \"stock\": 20\r\n         }'\r\n"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Model",
+			"item": [
+				{
+					"name": "http://localhost:8080/api/model",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n           \"product\": { \"id\": 1 },\r\n           \"name\": \"Modelo Exemplo\",\r\n           \"description\": \"Descrição do modelo\",\r\n           \"price\": 299.99\r\n         }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/model",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"model"
+							]
+						},
+						"description": "Generated from cURL: curl -X POST \"http://localhost:8080/api/model\" \\\r\n     -H \"Content-Type: application/json\" \\\r\n     -d '{\r\n           \"product\": { \"id\": 1 },\r\n           \"name\": \"Modelo Exemplo\",\r\n           \"description\": \"Descrição do modelo\",\r\n           \"price\": 299.99\r\n         }'\r\n"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/api/model/1",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/model/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"model",
+								"1"
+							]
+						},
+						"description": "Generated from cURL: curl -X GET \"http://localhost:8080/api/model/1\" \\\r\n     -H \"Content-Type: application/json\"\r\n"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/api/model",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/model",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"model"
+							]
+						},
+						"description": "Generated from cURL: curl -X GET \"http://localhost:8080/api/model\" \\\r\n     -H \"Content-Type: application/json\"\r\n"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Item",
+			"item": [
+				{
+					"name": "http://localhost:8080/api/item",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n           \"name\": \"Item Exemplo\",\r\n           \"status\": \"AVAILABLE\",\r\n           \"model\": { \"id\": 1 },\r\n           \"warehouse\": { \"id\": 1 }\r\n         }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/item",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"item"
+							]
+						},
+						"description": "Generated from cURL: curl -X POST \"http://localhost:8080/api/item\" \\\r\n     -H \"Content-Type: application/json\" \\\r\n     -d '{\r\n           \"name\": \"Item Exemplo\",\r\n           \"status\": \"AVAILABLE\",\r\n           \"model\": { \"id\": 1 },\r\n           \"warehouse\": { \"id\": 1 }\r\n         }'\r\n"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/api/item/1",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/item/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"item",
+								"1"
+							]
+						},
+						"description": "Generated from cURL: curl -X GET \"http://localhost:8080/api/item/1\" \\\r\n     -H \"Content-Type: application/json\"\r\n"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/api/item",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/item",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"item"
+							]
+						},
+						"description": "Generated from cURL: curl -X GET \"http://localhost:8080/api/item\" \\\r\n     -H \"Content-Type: application/json\"\r\n"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/api/item/1",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n           \"name\": \"Item Atualizado\",\r\n           \"status\": \"OUT_OF_STOCK\",\r\n           \"model\": { \"id\": 1 },\r\n           \"warehouse\": { \"id\": 1 }\r\n         }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/item/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"item",
+								"1"
+							]
+						},
+						"description": "Generated from cURL: curl -X PUT \"http://localhost:8080/api/item/1\" \\\r\n     -H \"Content-Type: application/json\" \\\r\n     -d '{\r\n           \"name\": \"Item Atualizado\",\r\n           \"status\": \"OUT_OF_STOCK\",\r\n           \"model\": { \"id\": 1 },\r\n           \"warehouse\": { \"id\": 1 }\r\n         }'\r\n"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/api/item/1/status",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\": \"DAMAGED\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/item/1/status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"item",
+								"1",
+								"status"
+							]
+						},
+						"description": "Generated from cURL: curl -X PATCH \"http://localhost:8080/api/item/1/status\" \\\r\n     -H \"Content-Type: application/json\" \\\r\n     -d '{\r\n           \"status\": \"DAMAGED\"\r\n         }'\r\n"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
