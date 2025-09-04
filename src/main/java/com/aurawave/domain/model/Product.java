@@ -1,27 +1,26 @@
 package com.aurawave.domain.model;
 
-import jakarta.persistence.*;
+import com.aurawave.domain.enumerated.ProductStatus;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 /**
  * Classe representando um produto.
  * Herda os campos de auditoria de {@link Auditable}.
  */
-@Entity(name = "product")
-@Getter @Setter @NoArgsConstructor
+
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class Product extends Auditable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "name")
     private String name;
-
-    @OneToMany(mappedBy = "product")
-    private List<Model> models;
+    private LocalDateTime validityDate;
+    private Long WarehouseId;
+    private BigDecimal costPrice;
+    private ProductStatus status;
 }

@@ -1,5 +1,6 @@
 package com.aurawave.controller;
 
+import com.aurawave.domain.model.Product;
 import com.aurawave.dto.product.CreateProductDto;
 import com.aurawave.dto.product.GetProductDto;
 import com.aurawave.service.ProductService;
@@ -25,8 +26,8 @@ public class ProductController {
      * @return Uma resposta HTTP indicando o sucesso da criação do produto.
      */
     @PostMapping
-    public ResponseEntity<Void> createProduct(@Valid @RequestBody CreateProductDto createProductDto) {
-        productService.create(createProductDto);
+    public ResponseEntity<Long> createProduct(@Valid @RequestBody Product request) {
+        productService.create(request);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 

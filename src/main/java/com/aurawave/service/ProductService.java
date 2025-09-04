@@ -1,11 +1,11 @@
 package com.aurawave.service;
 
 import com.aurawave.core.exception.NotFoundException;
-import com.aurawave.domain.interfaces.ServiceInterface;
+import com.aurawave.domain.interfaces.DaoInterface;
 import com.aurawave.domain.model.Product;
 import com.aurawave.dto.product.CreateProductDto;
 import com.aurawave.dto.product.GetProductDto;
-import com.aurawave.repository.ProductRepository;
+import com.aurawave.dao.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -15,12 +15,12 @@ import java.util.stream.Collectors;
 
 /**
  * Service responsável pelas operações CRUD para a entidade Product.
- * Implementa a interface {@link ServiceInterface} para fornecer as operações de criação,
+ * Implementa a interface {@link DaoInterface} para fornecer as operações de criação,
  * atualização, remoção e busca de produtos.
  */
 @Service
 @RequiredArgsConstructor
-public class ProductService implements ServiceInterface<GetProductDto, CreateProductDto> {
+public class ProductService implements DaoInterface<GetProductDto, CreateProductDto> {
 
     private final ProductRepository productRepository;
     private final ModelMapper modelMapper;

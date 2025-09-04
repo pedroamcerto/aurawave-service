@@ -3,16 +3,16 @@ package com.aurawave.domain.enumerated;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-public enum ItemStatus {
-    AVALIABLE,
+public enum ProductStatus {
+    AVAILABLE,
     USED,
     DAMAGED,
     EXPIRED,
     DISCARDED;
 
     @JsonCreator
-    public static ItemStatus forValue(String value) {
-        return ItemStatus.valueOf(value.toUpperCase());
+    public static ProductStatus forValue(String value) {
+        return ProductStatus.valueOf(value.toUpperCase());
     }
 
     @JsonValue

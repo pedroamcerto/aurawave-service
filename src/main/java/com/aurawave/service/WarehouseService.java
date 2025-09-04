@@ -1,13 +1,13 @@
 package com.aurawave.service;
 
 import com.aurawave.core.exception.NotFoundException;
-import com.aurawave.domain.interfaces.ServiceInterface;
+import com.aurawave.domain.interfaces.DaoInterface;
 import com.aurawave.domain.model.Warehouse;
 import com.aurawave.dto.warehouse.CreateWarehouseDto;
 import com.aurawave.dto.warehouse.GetWarehouseDto;
-import com.aurawave.repository.ItemRepository;
-import com.aurawave.repository.LaboratoryRepository;
-import com.aurawave.repository.WarehouseRepository;
+import com.aurawave.dao.ItemRepository;
+import com.aurawave.dao.LaboratoryRepository;
+import com.aurawave.dao.WarehouseRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class WarehouseService implements ServiceInterface<GetWarehouseDto, CreateWarehouseDto> {
+public class WarehouseService implements DaoInterface<GetWarehouseDto, CreateWarehouseDto> {
 
     private final WarehouseRepository warehouseRepository;
     private final LaboratoryRepository laboratoryRepository;
