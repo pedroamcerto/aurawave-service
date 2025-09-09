@@ -60,21 +60,9 @@
 			<artifactId>modelmapper</artifactId>
 			<version>3.2.3</version>
 		</dependency>
-		<!-- Oracle JDBC -->
 		<dependency>
 			<groupId>com.oracle.database.jdbc</groupId>
-			<artifactId>ojdbc8</artifactId>
-			<version>23.4.0.24.05</version>
-			<scope>runtime</scope>
-		</dependency>
-		<!-- FlyWay to migrations -->
-		<dependency>
-			<groupId>org.flywaydb</groupId>
-			<artifactId>flyway-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.flywaydb</groupId>
-			<artifactId>flyway-database-postgresql</artifactId>
+			<artifactId>ojdbc11</artifactId>
 		</dependency>
 	</dependencies>
 

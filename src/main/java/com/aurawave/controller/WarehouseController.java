@@ -1,59 +1,47 @@
 package com.aurawave.controller;
 
-import com.aurawave.dto.warehouse.CreateWarehouseDto;
-import com.aurawave.dto.warehouse.GetWarehouseDto;
+import com.aurawave.dto.warehouseDto.WarehouseRequestDto;
+import com.aurawave.dto.warehouseDto.WarehouseResponseDto;
 import com.aurawave.service.WarehouseService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * Controladora responsável pela gestão dos almoxarifados.
- */
 @RestController
-@RequestMapping("/api/warehouse")
+@RequestMapping("/api/warehouses")
 public class WarehouseController {
 
     @Autowired
-    private WarehouseService warehouseService;
+    private WarehouseService service;
 
-    /**
-     * Cria um novo almoxarifado.
-     *
-     * @param createWarehouseDto DTO com os dados do almoxarifado a ser criado.
-     * @return Resposta HTTP com o status de criação.
-     */
     @PostMapping
-    public ResponseEntity<Void> createWarehouse(@Valid @RequestBody CreateWarehouseDto createWarehouseDto) {
-        warehouseService.create(createWarehouseDto);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    @ResponseStatus(HttpStatus.CREATED)
+    public WarehouseResponseDto create(@Valid @RequestBody WarehouseRequestDto dto) {
+        return service.create(dto);
     }
 
-    /**
-     * Recupera os dados de um almoxarifado pelo seu ID.
-     *
-     * @param id O ID do almoxarifado.
-     * @return O DTO com os dados do almoxarifado.
-     */
+    @PutMapping("/{id}")
+    public WarehouseResponseDto update(@PathVariable Long id, @Valid @RequestBody WarehouseRequestDto dto) {
+        return service.update(id, dto);
+    }
+
     @GetMapping("/{id}")
-    public ResponseEntity<GetWarehouseDto> getWarehouseById(@PathVariable Long id) {
-        GetWarehouseDto warehouse = warehouseService.getById(id);
-        return ResponseEntity.ok(warehouse);
+    public WarehouseResponseDto getById(@PathVariable Long id) {
+        return service.getById(id);
     }
 
-    /**
-     * Recupera todos os almoxarifados cadastrados.
-     *
-     * @return Uma lista de DTOs com os dados de todos os almoxarifados.
-     */
     @GetMapping
-    public ResponseEntity<List<GetWarehouseDto>> getAllWarehouses() {
-        List<GetWarehouseDto> warehouses = warehouseService.getAll();
-        return ResponseEntity.ok(warehouses);
+    public List<WarehouseResponseDto> getAll() {
+        return service.getAll();
     }
 
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id) {
+        service.delete(id);
+    }
 }
+

@@ -1,564 +1,295 @@
 {
-	"info": {
-		"_postman_id": "fff94605-021b-4762-bb3d-af4a7045fedb",
-		"name": "Aurawave",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "38230679"
+	"type": "collection.insomnia.rest/5.0",
+	"name": "Imported Workspace",
+	"meta": {
+		"id": "wrk_c6baf8fd7d984a618db77271f9423cdc",
+		"created": 1757378880987,
+		"modified": 1757378880987,
+		"description": ""
 	},
-	"item": [
-		{
-			"name": "Laboratory",
-			"item": [
-				{
-					"name": "http://localhost:8080/api/laboratories",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n           \"name\": \"Laboratório 1\",\r\n           \"address\": \"Endereço do laboratório\"\r\n         }",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/laboratories",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"laboratories"
-							]
-						},
-						"description": "Generated from cURL: curl -X POST \"http://localhost:8080/api/laboratories\" \\\r\n     -H \"Content-Type: application/json\" \\\r\n     -d '{\r\n           \"name\": \"Laboratório 1\",\r\n           \"address\": \"Endereço do laboratório\"\r\n         }'"
-					},
-					"response": []
-				},
-				{
-					"name": "http://localhost:8080/api/laboratories/1",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/laboratories/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"laboratories",
-								"1"
-							]
-						},
-						"description": "Generated from cURL: curl -X GET \"http://localhost:8080/api/laboratories/1\"\r\n"
-					},
-					"response": []
-				},
-				{
-					"name": "http://localhost:8080/api/laboratories",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/laboratories",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"laboratories"
-							]
-						},
-						"description": "Generated from cURL: curl -X GET \"http://localhost:8080/api/laboratories\"\r\n"
-					},
-					"response": []
-				}
-			]
-		},
+	"collection": [
 		{
 			"name": "Warehouse",
-			"item": [
+			"meta": {
+				"id": "fld_94268afa6c044f81b686f6fda5f14469",
+				"created": 1757379054253,
+				"modified": 1757379228069,
+				"sortKey": -1757379054253,
+				"description": ""
+			},
+			"children": [
 				{
-					"name": "http://localhost:8080/api/warehouse",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"id\": 1,\r\n    \"laboratory\": {\r\n        \"id\": 1,\r\n        \"name\": \"Laboratório A\",\r\n        \"address\": \"Rua Exemplo, 123\"\r\n    }\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/warehouse",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"warehouse"
-							]
-						},
-						"description": "Generated from cURL: curl -X POST \"http://localhost:8080/api/warehouse\" -H \"Content-Type: application/json\" -d '{\r\n    \"id\": 1,\r\n    \"laboratory\": {\r\n        \"id\": 1,\r\n        \"name\": \"Laboratório A\",\r\n        \"address\": \"Rua Exemplo, 123\"\r\n    }\r\n}'\r\n"
+					"url": "http://localhost:8080/api/warehouses",
+					"name": "add new",
+					"meta": {
+						"id": "req_5aecbe6431614845a76a837be20861c7",
+						"created": 1757378881004,
+						"modified": 1757381860114,
+						"isPrivate": false,
+						"description": "",
+						"sortKey": -1757379071378
 					},
-					"response": []
+					"method": "POST",
+					"body": {
+						"mimeType": "application/json",
+						"text": "{\n\t\"name\": \"Main Warehouse\",\n\t\"address\": \"Av. Paulista, 1000 - São Paulo\"\n}"
+					},
+					"headers": [
+						{
+							"name": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"settings": {
+						"renderRequestBody": true,
+						"encodeUrl": true,
+						"followRedirects": "global",
+						"cookies": { "send": true, "store": true },
+						"rebuildPath": true
+					}
 				},
 				{
-					"name": "http://localhost:8080/api/warehouse/1",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/warehouse/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"warehouse",
-								"1"
-							]
-						},
-						"description": "Generated from cURL: curl -X GET \"http://localhost:8080/api/warehouse/1\"\r\n"
+					"url": "http://localhost:8080/api/warehouses/1",
+					"name": "update",
+					"meta": {
+						"id": "req_50f17d5e4b15451fbc934c11a8d4209f",
+						"created": 1757378910614,
+						"modified": 1757380149747,
+						"isPrivate": false,
+						"description": "",
+						"sortKey": -1757379071278
 					},
-					"response": []
+					"method": "PUT",
+					"body": {
+						"mimeType": "application/json",
+						"text": "{\n\t\"name\": \"Main Warehouse - Updated\",\n\t\"address\": \"Rua Augusta, 500 - São Paulo\"\n}"
+					},
+					"headers": [
+						{
+							"name": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"settings": {
+						"renderRequestBody": true,
+						"encodeUrl": true,
+						"followRedirects": "global",
+						"cookies": { "send": true, "store": true },
+						"rebuildPath": true
+					}
 				},
 				{
-					"name": "http://localhost:8080/api/warehouse",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/warehouse",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"warehouse"
-							]
-						},
-						"description": "Generated from cURL: curl -X GET \"http://localhost:8080/api/warehouse\"\r\n"
+					"url": "http://localhost:8080/api/warehouses/1",
+					"name": "find by id",
+					"meta": {
+						"id": "req_532f5b7235e649608bf95c6d3ab43041",
+						"created": 1757378939093,
+						"modified": 1757379073709,
+						"isPrivate": false,
+						"description": "",
+						"sortKey": -1757379071178
 					},
-					"response": []
+					"method": "GET",
+					"settings": {
+						"renderRequestBody": true,
+						"encodeUrl": true,
+						"followRedirects": "global",
+						"cookies": { "send": true, "store": true },
+						"rebuildPath": true
+					}
+				},
+				{
+					"url": "http://localhost:8080/api/warehouses",
+					"name": "get all",
+					"meta": {
+						"id": "req_bcf1ef8cedd14f7cb24f232887f9a0ff",
+						"created": 1757378950350,
+						"modified": 1757379250809,
+						"isPrivate": false,
+						"description": "",
+						"sortKey": -1757379071228
+					},
+					"method": "GET",
+					"settings": {
+						"renderRequestBody": true,
+						"encodeUrl": true,
+						"followRedirects": "global",
+						"cookies": { "send": true, "store": true },
+						"rebuildPath": true
+					}
+				},
+				{
+					"url": "http://localhost:8080/api/warehouses/1",
+					"name": "delete by id",
+					"meta": {
+						"id": "req_48737e4bb9cb4702bead7e35a18203ed",
+						"created": 1757378958948,
+						"modified": 1757379082348,
+						"isPrivate": false,
+						"description": "",
+						"sortKey": -1757379070878
+					},
+					"method": "DELETE",
+					"settings": {
+						"renderRequestBody": true,
+						"encodeUrl": true,
+						"followRedirects": "global",
+						"cookies": { "send": true, "store": true },
+						"rebuildPath": true
+					}
 				}
 			]
 		},
 		{
 			"name": "Product",
-			"item": [
+			"meta": {
+				"id": "fld_368e2193f6de44478062ff81e8876b66",
+				"created": 1757379094052,
+				"modified": 1757379094052,
+				"sortKey": -1757379094052,
+				"description": ""
+			},
+			"children": [
 				{
-					"name": "http://localhost:8080/api/product",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n           \"name\": \"Produto Exemplo\",\r\n           \"description\": \"Descrição do produto\",\r\n           \"price\": 99.99,\r\n           \"stock\": 10\r\n         }",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/product",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"product"
-							]
-						},
-						"description": "Generated from cURL: curl -X POST \"http://localhost:8080/api/product\" \\\r\n     -H \"Content-Type: application/json\" \\\r\n     -d '{\r\n           \"name\": \"Produto Exemplo\",\r\n           \"description\": \"Descrição do produto\",\r\n           \"price\": 99.99,\r\n           \"stock\": 10\r\n         }'\r\n"
+					"url": "http://localhost:8080/api/products",
+					"name": "add new",
+					"meta": {
+						"id": "req_45e05a7ff3aa4afebc3dc0b89baf36fd",
+						"created": 1757379108933,
+						"modified": 1757381787820,
+						"isPrivate": false,
+						"description": "",
+						"sortKey": -1757379222065
 					},
-					"response": []
+					"method": "POST",
+					"body": {
+						"mimeType": "application/json",
+						"text": "{\n\t\"name\": \"Notebook Dell\",\n\t\"validityDate\": \"2025-12-31T23:59:59\",\n\t\"warehouseId\": 2,\n\t\"costPrice\": 4500.00,\n\t\"status\": \"AVAILABLE\"\n}"
+					},
+					"headers": [
+						{
+							"name": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"settings": {
+						"renderRequestBody": true,
+						"encodeUrl": true,
+						"followRedirects": "global",
+						"cookies": { "send": true, "store": true },
+						"rebuildPath": true
+					}
 				},
 				{
-					"name": "http://localhost:8080/api/product/1",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:8080/api/product/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"product",
-								"1"
-							]
-						},
-						"description": "Generated from cURL: curl -X GET \"http://localhost:8080/api/product/1\" \\\r\n     -H \"Content-Type: application/json\"\r\n"
+					"url": "http://localhost:8080/api/products/2",
+					"name": "update",
+					"meta": {
+						"id": "req_e073f161bdf04aaa8558b74ed83b570b",
+						"created": 1757379115577,
+						"modified": 1757381837212,
+						"isPrivate": false,
+						"description": "",
+						"sortKey": -1757379222015
 					},
-					"response": []
+					"method": "PUT",
+					"body": {
+						"mimeType": "application/json",
+						"text": "{\n\t\"name\": \"Notebook Dell - Updated\",\n\t\"validityDate\": \"2026-06-30T23:59:59\",\n\t\"warehouseId\": 2,\n\t\"costPrice\": 4300.00,\n\t\"status\": \"USED\"\n}"
+					},
+					"headers": [
+						{
+							"name": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"settings": {
+						"renderRequestBody": true,
+						"encodeUrl": true,
+						"followRedirects": "global",
+						"cookies": { "send": true, "store": true },
+						"rebuildPath": true
+					}
 				},
 				{
-					"name": "http://localhost:8080/api/product",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:8080/api/product",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"product"
-							]
-						},
-						"description": "Generated from cURL: curl -X GET \"http://localhost:8080/api/product\" \\\r\n     -H \"Content-Type: application/json\"\r\n"
+					"url": "http://localhost:8080/api/products/2",
+					"name": "find by id",
+					"meta": {
+						"id": "req_0b745099235d46b78b4b37797c43f2cc",
+						"created": 1757379125089,
+						"modified": 1757381847801,
+						"isPrivate": false,
+						"description": "",
+						"sortKey": -1757379221765
 					},
-					"response": []
+					"method": "GET",
+					"settings": {
+						"renderRequestBody": true,
+						"encodeUrl": true,
+						"followRedirects": "global",
+						"cookies": { "send": true, "store": true },
+						"rebuildPath": true
+					}
 				},
 				{
-					"name": "http://localhost:8080/api/product/1",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n           \"name\": \"Produto Atualizado\",\r\n           \"description\": \"Descrição atualizada\",\r\n           \"price\": 109.99,\r\n           \"stock\": 20\r\n         }",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/product/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"product",
-								"1"
-							]
-						},
-						"description": "Generated from cURL: curl -X PUT \"http://localhost:8080/api/product/1\" \\\r\n     -H \"Content-Type: application/json\" \\\r\n     -d '{\r\n           \"name\": \"Produto Atualizado\",\r\n           \"description\": \"Descrição atualizada\",\r\n           \"price\": 109.99,\r\n           \"stock\": 20\r\n         }'\r\n"
+					"url": "http://localhost:8080/api/products",
+					"name": "get all",
+					"meta": {
+						"id": "req_96dc2a78fb5b46498d0f06255716613f",
+						"created": 1757379131434,
+						"modified": 1757379225342,
+						"isPrivate": false,
+						"description": "",
+						"sortKey": -1757379221865
 					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Model",
-			"item": [
-				{
-					"name": "http://localhost:8080/api/model",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n           \"product\": { \"id\": 1 },\r\n           \"name\": \"Modelo Exemplo\",\r\n           \"description\": \"Descrição do modelo\",\r\n           \"price\": 299.99\r\n         }",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/model",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"model"
-							]
-						},
-						"description": "Generated from cURL: curl -X POST \"http://localhost:8080/api/model\" \\\r\n     -H \"Content-Type: application/json\" \\\r\n     -d '{\r\n           \"product\": { \"id\": 1 },\r\n           \"name\": \"Modelo Exemplo\",\r\n           \"description\": \"Descrição do modelo\",\r\n           \"price\": 299.99\r\n         }'\r\n"
-					},
-					"response": []
+					"method": "GET",
+					"settings": {
+						"renderRequestBody": true,
+						"encodeUrl": true,
+						"followRedirects": "global",
+						"cookies": { "send": true, "store": true },
+						"rebuildPath": true
+					}
 				},
 				{
-					"name": "http://localhost:8080/api/model/1",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:8080/api/model/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"model",
-								"1"
-							]
-						},
-						"description": "Generated from cURL: curl -X GET \"http://localhost:8080/api/model/1\" \\\r\n     -H \"Content-Type: application/json\"\r\n"
+					"url": "http://localhost:8080/api/products/2",
+					"name": "delete by id",
+					"meta": {
+						"id": "req_20e27977d0e1488ca5ce6c025fffbb57",
+						"created": 1757379139775,
+						"modified": 1757381855317,
+						"isPrivate": false,
+						"description": "",
+						"sortKey": -1757379221665
 					},
-					"response": []
-				},
-				{
-					"name": "http://localhost:8080/api/model",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:8080/api/model",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"model"
-							]
-						},
-						"description": "Generated from cURL: curl -X GET \"http://localhost:8080/api/model\" \\\r\n     -H \"Content-Type: application/json\"\r\n"
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Item",
-			"item": [
-				{
-					"name": "http://localhost:8080/api/item",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n           \"name\": \"Item Exemplo\",\r\n           \"status\": \"AVAILABLE\",\r\n           \"model\": { \"id\": 1 },\r\n           \"warehouse\": { \"id\": 1 }\r\n         }",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/item",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"item"
-							]
-						},
-						"description": "Generated from cURL: curl -X POST \"http://localhost:8080/api/item\" \\\r\n     -H \"Content-Type: application/json\" \\\r\n     -d '{\r\n           \"name\": \"Item Exemplo\",\r\n           \"status\": \"AVAILABLE\",\r\n           \"model\": { \"id\": 1 },\r\n           \"warehouse\": { \"id\": 1 }\r\n         }'\r\n"
-					},
-					"response": []
-				},
-				{
-					"name": "http://localhost:8080/api/item/1",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:8080/api/item/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"item",
-								"1"
-							]
-						},
-						"description": "Generated from cURL: curl -X GET \"http://localhost:8080/api/item/1\" \\\r\n     -H \"Content-Type: application/json\"\r\n"
-					},
-					"response": []
-				},
-				{
-					"name": "http://localhost:8080/api/item",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:8080/api/item",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"item"
-							]
-						},
-						"description": "Generated from cURL: curl -X GET \"http://localhost:8080/api/item\" \\\r\n     -H \"Content-Type: application/json\"\r\n"
-					},
-					"response": []
-				},
-				{
-					"name": "http://localhost:8080/api/item/1",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n           \"name\": \"Item Atualizado\",\r\n           \"status\": \"OUT_OF_STOCK\",\r\n           \"model\": { \"id\": 1 },\r\n           \"warehouse\": { \"id\": 1 }\r\n         }",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/item/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"item",
-								"1"
-							]
-						},
-						"description": "Generated from cURL: curl -X PUT \"http://localhost:8080/api/item/1\" \\\r\n     -H \"Content-Type: application/json\" \\\r\n     -d '{\r\n           \"name\": \"Item Atualizado\",\r\n           \"status\": \"OUT_OF_STOCK\",\r\n           \"model\": { \"id\": 1 },\r\n           \"warehouse\": { \"id\": 1 }\r\n         }'\r\n"
-					},
-					"response": []
-				},
-				{
-					"name": "http://localhost:8080/api/item/1/status",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"status\": \"DAMAGED\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/item/1/status",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"item",
-								"1",
-								"status"
-							]
-						},
-						"description": "Generated from cURL: curl -X PATCH \"http://localhost:8080/api/item/1/status\" \\\r\n     -H \"Content-Type: application/json\" \\\r\n     -d '{\r\n           \"status\": \"DAMAGED\"\r\n         }'\r\n"
-					},
-					"response": []
+					"method": "DELETE",
+					"settings": {
+						"renderRequestBody": true,
+						"encodeUrl": true,
+						"followRedirects": "global",
+						"cookies": { "send": true, "store": true },
+						"rebuildPath": true
+					}
 				}
 			]
 		}
-	]
+	],
+	"cookieJar": {
+		"name": "Default Jar",
+		"meta": {
+			"id": "jar_167f3cec7a164d06f77c44311c9ede78a73feba6",
+			"created": 1757378882336,
+			"modified": 1757378882336
+		}
+	},
+	"environments": {
+		"name": "Base Environment",
+		"meta": {
+			"id": "env_167f3cec7a164d06f77c44311c9ede78a73feba6",
+			"created": 1757378881010,
+			"modified": 1757378881010,
+			"isPrivate": false
+		}
+	},
+	"info": {},
+	"item": []
 }

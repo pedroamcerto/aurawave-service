@@ -1,70 +1,46 @@
 package com.aurawave.controller;
 
-import com.aurawave.domain.model.Product;
-import com.aurawave.dto.product.CreateProductDto;
-import com.aurawave.dto.product.GetProductDto;
+import com.aurawave.dto.productDto.ProductRequestDto;
+import com.aurawave.dto.productDto.ProductResponseDto;
 import com.aurawave.service.ProductService;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/product")
-@RequiredArgsConstructor
+@RequestMapping("/api/products")
 public class ProductController {
 
-    private final ProductService productService;
+    @Autowired
+    private ProductService service;
 
-    /**
-     * Cria um novo produto.
-     *
-     * @param createProductDto O DTO contendo os dados do produto a ser criado.
-     * @return Uma resposta HTTP indicando o sucesso da criação do produto.
-     */
     @PostMapping
-    public ResponseEntity<Long> createProduct(@Valid @RequestBody Product request) {
-        productService.create(request);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    @ResponseStatus(HttpStatus.CREATED)
+    public ProductResponseDto create(@Valid @RequestBody ProductRequestDto dto) {
+        return service.create(dto);
     }
 
-    /**
-     * Atualiza um produto existente.
-     *
-     * @param id O ID do produto a ser atualizado.
-     * @param createProductDto O DTO com os dados atualizados do produto.
-     * @return Uma resposta HTTP indicando o sucesso da atualização.
-     */
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updateProduct(@PathVariable Long id, @Valid @RequestBody CreateProductDto createProductDto) {
-        productService.update(id, createProductDto);
-        return ResponseEntity.status(HttpStatus.OK).build();
+    public ProductResponseDto update(@PathVariable Long id, @Valid @RequestBody ProductRequestDto dto) {
+        return service.update(id, dto);
     }
 
-    /**
-     * Recupera um produto pelo seu ID.
-     *
-     * @param id O ID do produto a ser recuperado.
-     * @return Uma resposta HTTP com os dados do produto.
-     */
     @GetMapping("/{id}")
-    public ResponseEntity<GetProductDto> getProductById(@PathVariable Long id) {
-        GetProductDto getProductDto = productService.getById(id);
-        return ResponseEntity.status(HttpStatus.OK).body(getProductDto);
+    public ProductResponseDto getById(@PathVariable Long id) {
+        return service.getById(id);
     }
 
-    /**
-     * Recupera todos os produtos cadastrados.
-     *
-     * @return Uma resposta HTTP com a lista de todos os produtos.
-     */
     @GetMapping
-    public ResponseEntity<List<GetProductDto>> getAllProducts() {
-        List<GetProductDto> products = productService.getAll();
-        return ResponseEntity.status(HttpStatus.OK).body(products);
+    public List<ProductResponseDto> getAll() {
+        return service.getAll();
     }
 
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id) {
+        service.delete(id);
+    }
 }

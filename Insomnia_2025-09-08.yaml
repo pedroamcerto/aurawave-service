@@ -1,0 +1,263 @@
+type: collection.insomnia.rest/5.0
+name: Imported Workspace
+meta:
+  id: wrk_c6baf8fd7d984a618db77271f9423cdc
+  created: 1757378880987
+  modified: 1757378880987
+  description: ""
+collection:
+  - name: Warehouse
+    meta:
+      id: fld_94268afa6c044f81b686f6fda5f14469
+      created: 1757379054253
+      modified: 1757379228069
+      sortKey: -1757379054253
+      description: ""
+    children:
+      - url: http://localhost:8080/api/warehouses
+        name: add new
+        meta:
+          id: req_5aecbe6431614845a76a837be20861c7
+          created: 1757378881004
+          modified: 1757381860114
+          isPrivate: false
+          description: ""
+          sortKey: -1757379071378
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"name": "Main Warehouse",
+            	"address": "Av. Paulista, 1000 - São Paulo"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/warehouses/1
+        name: update
+        meta:
+          id: req_50f17d5e4b15451fbc934c11a8d4209f
+          created: 1757378910614
+          modified: 1757380149747
+          isPrivate: false
+          description: ""
+          sortKey: -1757379071278
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"name": "Main Warehouse - Updated",
+            	"address": "Rua Augusta, 500 - São Paulo"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/warehouses/1
+        name: find by id
+        meta:
+          id: req_532f5b7235e649608bf95c6d3ab43041
+          created: 1757378939093
+          modified: 1757379073709
+          isPrivate: false
+          description: ""
+          sortKey: -1757379071178
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/warehouses
+        name: get all
+        meta:
+          id: req_bcf1ef8cedd14f7cb24f232887f9a0ff
+          created: 1757378950350
+          modified: 1757379250809
+          isPrivate: false
+          description: ""
+          sortKey: -1757379071228
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/warehouses/1
+        name: delete by id
+        meta:
+          id: req_48737e4bb9cb4702bead7e35a18203ed
+          created: 1757378958948
+          modified: 1757379082348
+          isPrivate: false
+          description: ""
+          sortKey: -1757379070878
+        method: DELETE
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Product
+    meta:
+      id: fld_368e2193f6de44478062ff81e8876b66
+      created: 1757379094052
+      modified: 1757379094052
+      sortKey: -1757379094052
+      description: ""
+    children:
+      - url: http://localhost:8080/api/products
+        name: add new
+        meta:
+          id: req_45e05a7ff3aa4afebc3dc0b89baf36fd
+          created: 1757379108933
+          modified: 1757381787820
+          isPrivate: false
+          description: ""
+          sortKey: -1757379222065
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"name": "Notebook Dell",
+            	"validityDate": "2025-12-31T23:59:59",
+            	"warehouseId": 2,
+            	"costPrice": 4500.00,
+            	"status": "AVAILABLE"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/products/2
+        name: update
+        meta:
+          id: req_e073f161bdf04aaa8558b74ed83b570b
+          created: 1757379115577
+          modified: 1757381837212
+          isPrivate: false
+          description: ""
+          sortKey: -1757379222015
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"name": "Notebook Dell - Updated",
+            	"validityDate": "2026-06-30T23:59:59",
+            	"warehouseId": 2,
+            	"costPrice": 4300.00,
+            	"status": "USED"   
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/products/2
+        name: find by id
+        meta:
+          id: req_0b745099235d46b78b4b37797c43f2cc
+          created: 1757379125089
+          modified: 1757381847801
+          isPrivate: false
+          description: ""
+          sortKey: -1757379221765
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/products
+        name: get all
+        meta:
+          id: req_96dc2a78fb5b46498d0f06255716613f
+          created: 1757379131434
+          modified: 1757379225342
+          isPrivate: false
+          description: ""
+          sortKey: -1757379221865
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/products/2
+        name: delete by id
+        meta:
+          id: req_20e27977d0e1488ca5ce6c025fffbb57
+          created: 1757379139775
+          modified: 1757381855317
+          isPrivate: false
+          description: ""
+          sortKey: -1757379221665
+        method: DELETE
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_167f3cec7a164d06f77c44311c9ede78a73feba6
+    created: 1757378882336
+    modified: 1757378882336
+environments:
+  name: Base Environment
+  meta:
+    id: env_167f3cec7a164d06f77c44311c9ede78a73feba6
+    created: 1757378881010
+    modified: 1757378881010
+    isPrivate: false

@@ -73,17 +73,20 @@ A classe principal da aplicação é HiveServiceApplication, localizada no pacot
 
 
 [AurawaveServiceApplication:](./src/main/java/com/aurawave/AurawaveServiceApplication.java)
+
 ```java
 package com.aurawave;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
+@EnableScheduling
 @SpringBootApplication
 public class AurawaveServiceApplication {
-	public static void main(String[] args) {
-		SpringApplication.run(AurawaveServiceApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(AurawaveServiceApplication.class, args);
+    }
 }
 
 ```
@@ -134,7 +137,7 @@ Desenvolva no mínimo três métodos operacionais (diferentes dos getters & sett
 
 Implemente uma classe com o método main para o usuário informar os valores para os objetos criados e depois exiba os valores dos atributos. Pode utilizar o Scanner ou JOptionPane.
 
-Conforme combinado com o professor, desenvolvemos a aplicação utilizando Spring. Para interagir com a aplicação, você pode realizar requisições HTTP. Além disso, disponibilizamos uma collection para facilitar os testes, evitando a necessidade de buscar manualmente os endpoints:  [Collection](./Aurawave.postman_collection.json).
+Conforme combinado com o professor, desenvolvemos a aplicação utilizando Spring. Para interagir com a aplicação, você pode realizar requisições HTTP. Além disso, disponibilizamos uma collection para facilitar os testes, evitando a necessidade de buscar manualmente os endpoints:  [Collection](./Aurawave.postman_collection.json) ou [Insomnia](./Insomnia_2025-09-08.yaml).
 
 
 <br>

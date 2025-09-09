@@ -1,89 +1,100 @@
 package com.aurawave.service;
 
-import com.aurawave.core.exception.NotFoundException;
-import com.aurawave.domain.interfaces.DaoInterface;
+import com.aurawave.dao.ProductDao;
+import com.aurawave.dao.WarehouseDao;
+import com.aurawave.domain.enumerated.ProductStatus;
 import com.aurawave.domain.model.Product;
-import com.aurawave.dto.product.CreateProductDto;
-import com.aurawave.dto.product.GetProductDto;
-import com.aurawave.dao.ProductRepository;
+import com.aurawave.dto.productDto.ProductRequestDto;
+import com.aurawave.dto.productDto.ProductResponseDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Objects;
 
-/**
- * Service responsável pelas operações CRUD para a entidade Product.
- * Implementa a interface {@link DaoInterface} para fornecer as operações de criação,
- * atualização, remoção e busca de produtos.
- */
+@Log4j2
 @Service
 @RequiredArgsConstructor
-public class ProductService implements DaoInterface<GetProductDto, CreateProductDto> {
+public class ProductService {
 
-    private final ProductRepository productRepository;
-    private final ModelMapper modelMapper;
+    private final ProductDao productDao;
+    private final WarehouseDao warehouseDao;
+    private final ModelMapper mapper;
 
-    private static final String NOT_FOUND_MESSAGE = "Produto não encontrado";
+    public ProductResponseDto create(ProductRequestDto dto) {
+        if (!warehouseDao.existsById(dto.getWarehouseId())) {
+            throw new com.aurawave.core.exception.NotFoundException(
+                    "Warehouse (warehouseId=" + dto.getWarehouseId() + ") não encontrado");
+        }
 
-    /**
-     * Cria um novo produto.
-     *
-     * Este método mapeia o DTO de entrada {@link CreateProductDto} para a entidade Product
-     * e persiste o novo produto no banco de dados.
-     *
-     * @param entity O DTO contendo os dados do produto a ser criado.
-     */
-    @Override
-    public void create(CreateProductDto entity) {
-        Product product = modelMapper.map(entity, Product.class);
-        productRepository.save(product);
+        Product p = mapper.map(dto, Product.class);
+        Long id = productDao.create(p);
+        Product saved = productDao.getById(id);
+        return mapper.map(saved, ProductResponseDto.class);
     }
 
-    /**
-     * Atualiza um produto existente.
-     *
-     * Este método busca o produto por ID, atualiza seus dados e salva as mudanças no banco de dados.
-     *
-     * @param id O ID do produto a ser atualizado.
-     * @param createProductDto O DTO com os dados atualizados do produto.
-     */
-    @Override
-    public void update(Long id, CreateProductDto createProductDto) {
-        Product product = productRepository.findById(id).orElseThrow(() -> new NotFoundException(NOT_FOUND_MESSAGE));
+    public ProductResponseDto update(Long id, ProductRequestDto dto) {
+        if (!warehouseDao.existsById(dto.getWarehouseId())) {
+            throw new com.aurawave.core.exception.NotFoundException(
+                    "Warehouse (warehouseId=" + dto.getWarehouseId() + ") não encontrado");
+        }
 
-        modelMapper.map(createProductDto, product);
-        productRepository.save(product);
+        Product p = mapper.map(dto, Product.class);
+        productDao.update(id, p);
+        Product updated = productDao.getById(id);
+        return mapper.map(updated, ProductResponseDto.class);
     }
 
-    /**
-     * Recupera um produto pelo seu ID.
-     *
-     * Este método busca um produto no banco de dados e retorna um DTO com seus dados.
-     *
-     * @param id O ID do produto a ser recuperado.
-     * @return O DTO {@link GetProductDto} com os dados do produto encontrado.
-     */
-    @Override
-    public GetProductDto getById(Long id) {
-        Product product = productRepository.findById(id).orElseThrow(() -> new NotFoundException(NOT_FOUND_MESSAGE));
-
-        return modelMapper.map(product, GetProductDto.class);
+    public ProductResponseDto getById(Long id) {
+        return mapper.map(productDao.getById(id), ProductResponseDto.class);
     }
 
-    /**
-     * Recupera todos os produtos cadastrados no banco de dados.
-     *
-     * Este método retorna todos os produtos armazenados no banco de dados como uma lista de DTOs.
-     *
-     * @return Uma lista de DTOs {@link GetProductDto} com os dados de todos os produtos.
-     */
-    @Override
-    public List<GetProductDto> getAll() {
-        return productRepository.findAll().stream()
-                .map(product -> modelMapper.map(product, GetProductDto.class))
-                .collect(Collectors.toList());
+    public List<ProductResponseDto> getAll() {
+        return productDao.getAll().stream()
+                .map(prod -> mapper.map(prod, ProductResponseDto.class))
+                .toList();
     }
 
+    public void delete(Long id) {
+        productDao.delete(id);
+    }
+
+    public void validValidityProduct() {
+        log.atInfo().log("Verificando a data de vencimento dos produtos.");
+
+        long start = System.currentTimeMillis();
+
+        List<ProductResponseDto> responseDtos = getAll();
+
+        if (responseDtos.isEmpty()) {
+            log.atInfo().log("Nenhum produto encontrado. Fim do processamento.");
+            return;
+        }
+
+        log.atInfo().log("Foram recuperados {} produto{}da base.", responseDtos.size(), (responseDtos.size() == 1) ? "" : "s");
+
+        LocalDateTime currentDate = LocalDateTime.now();
+
+        responseDtos.stream()
+                .filter(Objects::nonNull)
+                .filter(response -> response.getValidityDate() != null)
+                .filter(response -> response.getValidityDate().isBefore(currentDate))
+                .forEach(response -> {
+                    response.setStatus(ProductStatus.EXPIRED);
+
+                    update(response.getId(),
+                            new ProductRequestDto(
+                                    response.getName(),
+                                    response.getValidityDate(),
+                                    response.getWarehouseId(),
+                                    response.getCostPrice(),
+                                    response.getStatus()
+                            ));
+                });
+
+        log.atInfo().log("Fim do processamento. {} ms", System.currentTimeMillis() - start);
+    }
 }

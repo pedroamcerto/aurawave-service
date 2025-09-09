@@ -1,5 +1,6 @@
 package com.aurawave.core.configurations;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.sql.Connection;
@@ -13,6 +14,7 @@ import java.util.Properties;
 
 @Configuration
 public class OracleConnectionConfig {
+    @Bean
     public static Connection getConnection() throws SQLException {
         String url  = System.getenv().getOrDefault("ORACLE_URL", "jdbc:oracle:thin:@oracle.fiap.com.br:1521:orcl");
         String user = System.getenv().getOrDefault("ORACLE_USER", "rm558982");
