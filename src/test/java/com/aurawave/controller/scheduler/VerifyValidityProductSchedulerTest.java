@@ -1,13 +1,12 @@
 package com.aurawave.controller.scheduler;
 
 import com.aurawave.service.ProductService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import java.lang.reflect.Method;
@@ -16,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
-@Tag("unit")
+@ExtendWith(MockitoExtension.class)
 class VerifyValidityProductSchedulerTest {
 
     @Mock
@@ -24,11 +23,6 @@ class VerifyValidityProductSchedulerTest {
 
     @InjectMocks
     private VerifyValidityProductScheduler scheduler;
-
-    @BeforeEach
-    void setup() {
-        MockitoAnnotations.openMocks(this);
-    }
 
     @Test
     @DisplayName("Deve invocar service.validValidityProduct() quando o método agendado for chamado")

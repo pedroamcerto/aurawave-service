@@ -39,11 +39,10 @@ public class ProductDao implements ProductInterface {
             if (rows == 0) throw new SQLException("Insert falhou: nenhuma linha afetada.");
 
             try (ResultSet rs = ps.getGeneratedKeys()) {
-                if (rs.next()) return rs.getLong(1); // ID numérico
+                if (rs.next()) return rs.getLong(1);
             }
             throw new SQLException("Não foi possível recuperar a chave gerada (ID).");
         } catch (SQLException e) {
-            // ORA-02291: viola FK (parent key not found)
             if (e.getErrorCode() == 2291) {
                 throw new NotFoundException("Warehouse (warehouseId=" + p.getWarehouseId() + ") não encontrado para o produto.");
             }
