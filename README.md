@@ -97,7 +97,7 @@ Após rodar o comando mvn spring-boot:run, a aplicação estará acessível no n
 ```
 http://localhost:8080
 ```
-Caso queira rodar a aplicação em outra porta, é possível configurar isso no arquivo [application.yml](./src/main/resources/application.yml):
+Caso queira rodar a aplicação em outra porta, é possível configurar isso no arquivo [application.yml](src/main/resources/application-local.yml):
 ```properties
 server:
     port=8081

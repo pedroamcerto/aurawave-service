@@ -15,8 +15,11 @@ import java.util.Properties;
 @Configuration
 public class OracleConnectionConfig {
     @Bean
-    public static Connection getConnection() throws SQLException {
-        String url  = System.getenv().getOrDefault("ORACLE_URL", "jdbc:oracle:thin:@oracle.fiap.com.br:1521:orcl");
+    public Connection getConnection() throws SQLException {
+        String url  = System.getenv().getOrDefault(
+                "ORACLE_URL",
+                "jdbc:oracle:thin:@//oracle.fiap.com.br:1521/orcl" // <— troquei :orcl por /orcl
+        );
         String user = System.getenv().getOrDefault("ORACLE_USER", "rm558982");
         String pass = System.getenv().getOrDefault("ORACLE_PASSWORD", "050505");
 
