@@ -9,9 +9,7 @@ import com.aurawave.dto.productDto.ProductRequestDto;
 import com.aurawave.dto.productDto.ProductResponseDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.*;
 import org.modelmapper.ModelMapper;
 
 import java.math.BigDecimal;
@@ -24,21 +22,18 @@ import static org.mockito.Mockito.*;
 
 class ProductServiceTest {
 
-    @Mock
-    private ProductDao productDao;
+    @Mock private ProductDao productDao;
+    @Mock private WarehouseDao warehouseDao;
+    @Mock private ModelMapper mapper;
 
-    @Mock
-    private WarehouseDao warehouseDao;
-
-    @Mock
-    private ModelMapper mapper;
-
-    @InjectMocks
+    @Spy @InjectMocks
     private ProductService service;
+
+    AutoCloseable mocks;
 
     @BeforeEach
     void setup() {
-        MockitoAnnotations.openMocks(this);
+        mocks = MockitoAnnotations.openMocks(this);
     }
 
     private ProductRequestDto dto(String name, LocalDateTime vd, Long wid, String price, ProductStatus st) {
@@ -60,6 +55,7 @@ class ProductServiceTest {
         return new ProductResponseDto(id, name, vd, wid, new BigDecimal(price), st,
                 LocalDateTime.now(), LocalDateTime.now());
     }
+
 
     @Test
     void testCreateOk() {
@@ -162,4 +158,66 @@ class ProductServiceTest {
         verify(productDao).delete(9L);
     }
 
+
+    @Test
+    void testValidValidityProduct_IsEmptyList_NoUpdate() {
+        doReturn(List.of()).when(service).getAll();
+
+        service.validValidityProduct();
+
+        verify(service, never()).update(anyLong(), any(ProductRequestDto.class));
+        verify(productDao, never()).update(anyLong(), any());
+    }
+
+    @Test
+    void testValidValidityProduct_OnlyExpiredAreUpdated() {
+        var past = LocalDateTime.now().minusDays(1);
+        var future = LocalDateTime.now().plusDays(5);
+
+        var expired = new ProductResponseDto(
+                101L, "Produto Expirado", past, 77L, new BigDecimal("9.99"),
+                ProductStatus.AVAILABLE, LocalDateTime.now(), LocalDateTime.now());
+
+        var ok = new ProductResponseDto(
+                202L, "Produto OK", future, 88L, new BigDecimal("19.99"),
+                ProductStatus.AVAILABLE, LocalDateTime.now(), LocalDateTime.now());
+
+        doReturn(List.of(expired, ok)).when(service).getAll();
+
+        when(warehouseDao.existsById(anyLong())).thenReturn(true);
+        when(mapper.map(any(ProductRequestDto.class), eq(Product.class))).thenReturn(new Product());
+        doNothing().when(productDao).update(anyLong(), any(Product.class));
+        when(productDao.getById(anyLong())).thenReturn(new Product());
+        when(mapper.map(any(Product.class), eq(ProductResponseDto.class)))
+                .thenReturn(new ProductResponseDto());
+
+        ArgumentCaptor<Long> idCap = ArgumentCaptor.forClass(Long.class);
+        ArgumentCaptor<ProductRequestDto> dtoCap = ArgumentCaptor.forClass(ProductRequestDto.class);
+
+        service.validValidityProduct();
+
+        verify(service, times(1)).update(idCap.capture(), dtoCap.capture());
+
+        assertEquals(101L, idCap.getValue());
+        ProductRequestDto sent = dtoCap.getValue();
+        assertEquals("Produto Expirado", sent.getName());
+        assertEquals(past, sent.getValidityDate());
+        assertEquals(new BigDecimal("9.99"), sent.getCostPrice());
+        assertEquals(77L, sent.getWarehouseId());
+        assertEquals(ProductStatus.EXPIRED, sent.getStatus());
+    }
+
+    @Test
+    void testValidValidityProduct_NullsAndNoValidity_NoUpdate() {
+        var withoutValidity = new ProductResponseDto(
+                303L, "Sem Validade", null, 55L, new BigDecimal("5.00"),
+                ProductStatus.AVAILABLE, LocalDateTime.now(), LocalDateTime.now());
+
+        when(service.getAll()).thenReturn(List.of());
+
+        service.validValidityProduct();
+
+        verify(service, never()).update(anyLong(), any(ProductRequestDto.class));
+        verify(productDao, never()).update(anyLong(), any());
+    }
 }
