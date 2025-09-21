@@ -6,6 +6,7 @@ import com.aurawave.service.WarehouseService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,23 +20,23 @@ public class WarehouseController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public WarehouseResponseDto create(@Valid @RequestBody WarehouseRequestDto dto) {
-        return service.create(dto);
+    public ResponseEntity<WarehouseResponseDto> create(@Valid @RequestBody WarehouseRequestDto dto) {
+        return ResponseEntity.ok(service.create(dto));
     }
 
     @PutMapping("/{id}")
-    public WarehouseResponseDto update(@PathVariable Long id, @Valid @RequestBody WarehouseRequestDto dto) {
-        return service.update(id, dto);
+    public ResponseEntity<WarehouseResponseDto> update(@PathVariable Long id, @Valid @RequestBody WarehouseRequestDto dto) {
+        return ResponseEntity.ok(service.update(id, dto));
     }
 
     @GetMapping("/{id}")
-    public WarehouseResponseDto getById(@PathVariable Long id) {
-        return service.getById(id);
+    public ResponseEntity<WarehouseResponseDto> getById(@PathVariable Long id) {
+        return ResponseEntity.ok(service.getById(id));
     }
 
     @GetMapping
-    public List<WarehouseResponseDto> getAll() {
-        return service.getAll();
+    public ResponseEntity<List<WarehouseResponseDto>> getAll() {
+        return ResponseEntity.ok(service.getAll());
     }
 
     @DeleteMapping("/{id}")

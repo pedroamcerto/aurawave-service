@@ -1,7 +1,7 @@
 package com.aurawave.dao;
 
 import com.aurawave.core.exception.NotFoundException;
-import com.aurawave.domain.interfaces.WarehouseInterface;
+import com.aurawave.domain.interfaces.DaoInterface;
 import com.aurawave.domain.model.Warehouse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class WarehouseDao implements WarehouseInterface {
+public class WarehouseDao implements DaoInterface<Warehouse, Long> {
 
     @Autowired
     private Connection connection;

@@ -20,7 +20,7 @@ public class Product extends Auditable {
     private Long id;
     private String name;
     private LocalDateTime validityDate;
-    private Long WarehouseId;
+    private Long warehouseId;
     private BigDecimal costPrice;
     private ProductStatus status;
 }

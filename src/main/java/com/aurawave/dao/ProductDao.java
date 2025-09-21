@@ -2,7 +2,7 @@ package com.aurawave.dao;
 
 import com.aurawave.core.exception.NotFoundException;
 import com.aurawave.domain.enumerated.ProductStatus;
-import com.aurawave.domain.interfaces.ProductInterface;
+import com.aurawave.domain.interfaces.DaoInterface;
 import com.aurawave.domain.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class ProductDao implements ProductInterface {
+public class ProductDao implements DaoInterface<Product, Long> {
 
     @Autowired
     private Connection connection;

@@ -6,6 +6,7 @@ import com.aurawave.service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,23 +20,23 @@ public class ProductController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ProductResponseDto create(@Valid @RequestBody ProductRequestDto dto) {
-        return service.create(dto);
+    public ResponseEntity<ProductResponseDto> create(@Valid @RequestBody ProductRequestDto dto) {
+        return ResponseEntity.ok(service.create(dto));
     }
 
     @PutMapping("/{id}")
-    public ProductResponseDto update(@PathVariable Long id, @Valid @RequestBody ProductRequestDto dto) {
-        return service.update(id, dto);
+    public ResponseEntity<ProductResponseDto> update(@PathVariable Long id, @Valid @RequestBody ProductRequestDto dto) {
+        return ResponseEntity.ok(service.update(id, dto));
     }
 
     @GetMapping("/{id}")
-    public ProductResponseDto getById(@PathVariable Long id) {
-        return service.getById(id);
+    public ResponseEntity<ProductResponseDto> getById(@PathVariable Long id) {
+        return ResponseEntity.ok(service.getById(id));
     }
 
     @GetMapping
-    public List<ProductResponseDto> getAll() {
-        return service.getAll();
+    public ResponseEntity<List<ProductResponseDto>> getAll() {
+        return ResponseEntity.ok(service.getAll());
     }
 
     @DeleteMapping("/{id}")
