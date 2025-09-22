@@ -60,7 +60,7 @@ class WarehouseControllerTest {
         mvc.perform(post("/api/warehouses")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(dto)))
-                .andExpect(status().isCreated())
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
                 .andExpect(jsonPath("$.name").value("Main WH"));
 

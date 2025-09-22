@@ -136,8 +136,8 @@ class WarehouseDaoTest {
         when(rs.getLong("ID")).thenReturn(1L, 2L);
         when(rs.getString("NAME")).thenReturn("A", "B");
         when(rs.getString("ADDRESS")).thenReturn("Rua A, 1", "Rua B, 2");
-        when(rs.getTimestamp("CREATED_DATE")).thenReturn(null, null);
-        when(rs.getTimestamp("MODIFY_DATE")).thenReturn(null, null);
+        when(rs.getTimestamp("CREATED_DATE")).thenReturn(null, (Timestamp) null);
+        when(rs.getTimestamp("MODIFY_DATE")).thenReturn(null, (Timestamp) null);
 
         var list = dao.getAll();
 
