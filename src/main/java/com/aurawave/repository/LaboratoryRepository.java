@@ -1,6 +1,6 @@
 package com.aurawave.repository;
 
-import com.aurawave.domain.model.Laboratory;
+import com.aurawave.core.domain.Laboratory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

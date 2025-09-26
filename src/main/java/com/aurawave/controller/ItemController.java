@@ -2,7 +2,6 @@ package com.aurawave.controller;
 
 import com.aurawave.dto.item.CreateItemDto;
 import com.aurawave.dto.item.GetItemDto;
-import com.aurawave.domain.enumerated.ItemStatus;
 import com.aurawave.dto.item.UpdateItemStatusDto;
 import com.aurawave.service.ItemService;
 import jakarta.validation.Valid;

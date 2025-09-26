@@ -1,6 +1,6 @@
 package com.aurawave.repository;
 
-import com.aurawave.domain.model.Model;
+import com.aurawave.core.domain.Model;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

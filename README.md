@@ -124,8 +124,8 @@ Desenvolva no mínimo três métodos operacionais (diferentes dos getters & sett
 
 - [Sobrecarga](./src/main/java/com/aurawave/service/ItemService.java)
 - [Sobrescrita](./src/main/java/com/aurawave/service)
-- [Métodos diferentes](./src/main/java/com/aurawave/domain/interfaces/ServiceInterface.java)
-- [Encapsulamento](./src/main/java/com/aurawave/domain/model)
+- [Métodos diferentes](src/main/java/com/aurawave/core/domain/interfaces/ServiceInterface.java)
+- [Encapsulamento](src/main/java/com/aurawave/core/domain/model)
 - [Encapsulamento](./src/main/java/com/aurawave/dto)
 
 **Obs:** A aplicação conta com JavaDoc nas principais classes e métodos, e também possui diversos outros métodos que contem requisitos como os descritos, fique a vontade para explorar o restante do projeto! :)
