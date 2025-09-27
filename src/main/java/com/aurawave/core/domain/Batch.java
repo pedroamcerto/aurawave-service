@@ -21,7 +21,7 @@ public class Batch extends Auditable {
     private String name;
     private LocalDate expirationDate;
 
-    @ManyToOne
-    @JoinColumn
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "supplier_id")
     private Supplier supplier;
 }

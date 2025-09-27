@@ -23,11 +23,11 @@ public class Track {
     @GeneratedValue
     private UUID id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "event_id_event", referencedColumnName = "event_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "event_id_event", referencedColumnName = "event_id")
     private Event event;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "session_id_session", referencedColumnName = "session_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "session_id_session", referencedColumnName = "session_id")
     private Session session;
 }

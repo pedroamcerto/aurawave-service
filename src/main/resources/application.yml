@@ -1,21 +1,24 @@
 server:
   port: 8080
+  error:
+    include:
+      stacktrace: never
 
 spring:
-  application:
-    name: "aurawave-service"
-  main:
-    allow-bean-definition-overriding: true
   datasource:
-    url: jdbc:h2:mem:aurawave-db
-    driver-class-name: org.h2.Driver
-    username: sa
-    password:
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@oracle.fiap.com.br:1521:orcl
+    username: rm558982
+    password: 050505
+
   jpa:
     hibernate:
-      ddl-auto: update
-    show-sql: true
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.OracleDialect
+
+  flyway:
+    enabled: false
+    baseline-on-migrate: true
+    locations: classpath:db/migration

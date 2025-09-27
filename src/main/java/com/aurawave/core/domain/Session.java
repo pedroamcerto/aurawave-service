@@ -21,11 +21,11 @@ public class Session extends Auditable {
     private LocalDateTime startDate;
     private LocalDateTime endDate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "warehouse_id")
     private Warehouse warehouse;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "collaborator_id")
     private Collaborator collaborator;
 }

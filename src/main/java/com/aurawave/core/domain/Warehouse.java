@@ -23,7 +23,7 @@ public class Warehouse extends Auditable {
 
     private String name;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "laboratory_id")
     private Laboratory laboratory;
 }
