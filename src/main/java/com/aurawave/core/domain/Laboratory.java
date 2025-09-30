@@ -19,5 +19,8 @@ public class Laboratory extends Auditable {
     private UUID id;
 
     private String name;
-    private String address;
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "address_id", nullable = false, unique = true)
+    private Address address;
 }

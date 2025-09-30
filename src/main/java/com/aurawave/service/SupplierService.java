@@ -49,10 +49,15 @@ public class SupplierService {
         return PageResponseDto.of(supplierResponseDtos);
     }
 
-    public SupplierResponseDto findById(UUID id) {
+    public SupplierResponseDto findByIdToDto(UUID id) {
         var supplier = repository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Supplier %s not found".formatted(id)));
         return modelMapper.map(supplier, SupplierResponseDto.class);
+    }
+
+    public Supplier findById(UUID id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Supplier %s not found".formatted(id)));
     }
 
     public Long count() {

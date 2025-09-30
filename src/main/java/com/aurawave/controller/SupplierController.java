@@ -18,6 +18,7 @@ import java.util.UUID;
 @RequestMapping("/v1/supplier")
 @RequiredArgsConstructor
 public class SupplierController {
+
     private final SupplierService supplierService;
 
     @PostMapping("/add")
@@ -42,7 +43,7 @@ public class SupplierController {
     @GetMapping("/{id}")
     public ResponseEntity<SupplierResponseDto> findById(@PathVariable UUID id) {
         log.info("Buscando fornecedor por Id: {}.", id);
-        return ResponseEntity.ok(supplierService.findById(id));
+        return ResponseEntity.ok(supplierService.findByIdToDto(id));
     }
 
     @GetMapping("/count")
