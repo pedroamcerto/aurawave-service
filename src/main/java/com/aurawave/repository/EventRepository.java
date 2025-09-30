@@ -1,8 +1,8 @@
 package com.aurawave.repository;
 
-import com.aurawave.core.domain.Item;
+import com.aurawave.core.domain.Event;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;
 
-public interface ItemRepository extends JpaRepository<Item, UUID> { }
+public interface EventRepository extends JpaRepository<Event, UUID> { }

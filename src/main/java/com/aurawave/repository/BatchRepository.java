@@ -1,8 +1,8 @@
 package com.aurawave.repository;
 
-import com.aurawave.core.domain.Item;
+import com.aurawave.core.domain.Batch;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;
 
-public interface ItemRepository extends JpaRepository<Item, UUID> { }
+public interface BatchRepository extends JpaRepository<Batch, UUID> { }
