@@ -1,4 +1,4 @@
-package com.aurawave.dto.warehouseDto;
+package com.aurawave.dto.itemDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,10 +11,12 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class WarehouseResponseDto {
+public class ItemResponseDto {
     private Long id;
-    private String name;
-    private Long laboratoryId;
+    private String nmItem;
+    private String status;
+    private Long modelId;
+    private Long batchId;
     private LocalDateTime createdDate;
     private LocalDateTime modifyDate;
 }

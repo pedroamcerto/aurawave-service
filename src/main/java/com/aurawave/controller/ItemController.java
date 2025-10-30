@@ -1,8 +1,8 @@
 package com.aurawave.controller;
 
-import com.aurawave.dto.productDto.ProductRequestDto;
-import com.aurawave.dto.productDto.ProductResponseDto;
-import com.aurawave.service.ProductService;
+import com.aurawave.dto.itemDto.ItemRequestDto;
+import com.aurawave.dto.itemDto.ItemResponseDto;
+import com.aurawave.service.ItemService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -14,39 +14,39 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/products")
-@Tag(name = "Produtos", description = "CRUD de Produtos")
-public class ProductController {
+@RequestMapping("/api/items")
+@Tag(name = "Itens", description = "CRUD de Itens")
+public class ItemController {
 
     @Autowired
-    private ProductService service;
+    private ItemService service;
 
-    @Operation(summary = "Cria um novo produto")
+    @Operation(summary = "Cria um item")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<ProductResponseDto> create(@Valid @RequestBody ProductRequestDto dto) {
+    public ResponseEntity<ItemResponseDto> create(@Valid @RequestBody ItemRequestDto dto) {
         return ResponseEntity.ok(service.create(dto));
     }
 
-    @Operation(summary = "Atualiza um produto")
+    @Operation(summary = "Atualiza um item")
     @PutMapping("/{id}")
-    public ResponseEntity<ProductResponseDto> update(@PathVariable Long id, @Valid @RequestBody ProductRequestDto dto) {
+    public ResponseEntity<ItemResponseDto> update(@PathVariable Long id, @Valid @RequestBody ItemRequestDto dto) {
         return ResponseEntity.ok(service.update(id, dto));
     }
 
-    @Operation(summary = "Obtem um produto pelo ID")
+    @Operation(summary = "Obtem um item por ID")
     @GetMapping("/{id}")
-    public ResponseEntity<ProductResponseDto> getById(@PathVariable Long id) {
+    public ResponseEntity<ItemResponseDto> getById(@PathVariable Long id) {
         return ResponseEntity.ok(service.getById(id));
     }
 
-    @Operation(summary = "Obtem uma lista de todos produtos")
+    @Operation(summary = "Obtem uma lista de itens")
     @GetMapping
-    public ResponseEntity<List<ProductResponseDto>> getAll() {
+    public ResponseEntity<List<ItemResponseDto>> getAll() {
         return ResponseEntity.ok(service.getAll());
     }
 
-    @Operation(summary = "Deleta um produto")
+    @Operation(summary = "Deleta um item")
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {

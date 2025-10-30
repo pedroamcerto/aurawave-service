@@ -6,9 +6,10 @@ import java.time.LocalDateTime;
 /**
  * Classe base que armazena os campos de auditoria: data de criação e data de modificação.
  */
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Auditable {
-
     private LocalDateTime createdDate;
     private LocalDateTime modifyDate;
 }

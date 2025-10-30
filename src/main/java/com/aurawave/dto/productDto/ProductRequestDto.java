@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class ProductRequestDto {
     @NotBlank(message = "name é obrigatório")
-    @Size(max = 120, message = "name pode ter no máximo 120 caracteres")
+    @Size(max = 75, message = "name pode ter no máximo 75 caracteres")
     private String name;
 
     private LocalDateTime validityDate;

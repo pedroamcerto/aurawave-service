@@ -4,11 +4,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum ProductStatus {
-    AVAILABLE,
-    USED,
-    DAMAGED,
-    EXPIRED,
-    DISCARDED;
+    ACTIVE,
+    INACTIVE,
+    EXPIRED;
 
     @JsonCreator
     public static ProductStatus forValue(String value) {

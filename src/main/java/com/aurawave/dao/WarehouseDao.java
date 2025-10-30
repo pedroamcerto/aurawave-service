@@ -17,14 +17,14 @@ public class WarehouseDao implements DaoInterface<Warehouse, Long> {
     private Connection connection;
 
     @Override
-    public Long create(Warehouse wh) {
+    public Long create(Warehouse warehouse) {
         final String sql = """
-            INSERT INTO WAREHOUSE (NAME, ADDRESS)
+            INSERT INTO WAREHOUSE (NM_WAREHOUSE, LABORATORY_ID_LABORATORY)
             VALUES (?, ?)
             """;
         try (PreparedStatement ps = connection.prepareStatement(sql, new String[]{"ID"})) {
-            ps.setString(1, wh.getName());
-            ps.setString(2, wh.getAddress());
+            ps.setString(1, warehouse.getName());
+            ps.setLong(2, warehouse.getLaboratoryId());
             int rows = ps.executeUpdate();
             if (rows == 0) throw new SQLException("Insert falhou: nenhuma linha afetada.");
 
@@ -38,55 +38,21 @@ public class WarehouseDao implements DaoInterface<Warehouse, Long> {
     }
 
     @Override
-    public void update(Long id, Warehouse wh) {
+    public void update(Long id, Warehouse warehouse) {
         final String sql = """
             UPDATE WAREHOUSE
-               SET NAME = ?, ADDRESS = ?
+               SET NM_WAREHOUSE = ?, LABORATORY_ID_LABORATORY = ?
              WHERE ID = ?
             """;
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setString(1, wh.getName());
-            ps.setString(2, wh.getAddress());
+            ps.setString(1, warehouse.getName());
+            ps.setLong(2, warehouse.getLaboratoryId());
             ps.setLong(3, id);
+
             int rows = ps.executeUpdate();
-            if (rows == 0) throw new NotFoundException("Almoxarifado id " + id + " não encontrado");
+            if (rows == 0) throw new NotFoundException("Almoxarifado com ID " + id + " não encontrado.");
         } catch (SQLException e) {
-            throw new RuntimeException("Erro ao atualizar o almoxarifado " + id, e);
-        }
-    }
-
-    @Override
-    public Warehouse getById(Long id) {
-        final String sql = """
-            SELECT ID, NAME, ADDRESS, CREATED_DATE, MODIFY_DATE
-              FROM WAREHOUSE
-             WHERE ID = ?
-            """;
-        try (PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setLong(1, id);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (!rs.next()) throw new NotFoundException("Almoxarifado id " + id + " não encontrado");
-                return map(rs);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException("Erro ao recuperar almoxarifado " + id, e);
-        }
-    }
-
-    @Override
-    public List<Warehouse> getAll() {
-        final String sql = """
-            SELECT ID, NAME, ADDRESS, CREATED_DATE, MODIFY_DATE
-              FROM WAREHOUSE
-             ORDER BY ID
-            """;
-        List<Warehouse> list = new ArrayList<>();
-        try (PreparedStatement ps = connection.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
-            while (rs.next()) list.add(map(rs));
-            return list;
-        } catch (SQLException e) {
-            throw new RuntimeException("Erro ao recuperar almoxarifados", e);
+            throw new RuntimeException("Erro na atualização do almoxarifado", e);
         }
     }
 
@@ -96,34 +62,70 @@ public class WarehouseDao implements DaoInterface<Warehouse, Long> {
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setLong(1, id);
             int rows = ps.executeUpdate();
-            if (rows == 0) throw new NotFoundException("Almoxarifado id " + id + " não encontrado");
+            if (rows == 0) throw new NotFoundException("Almoxarifado com ID " + id + " não encontrado.");
         } catch (SQLException e) {
-            throw new RuntimeException("Erro ao deletar o almoxarifado " + id, e);
+            throw new RuntimeException("Erro ao deletar almoxarifado", e);
+        }
+    }
+
+    @Override
+    public Warehouse getById(Long id) {
+        final String sql = """
+            SELECT ID, NM_WAREHOUSE, LABORATORY_ID_LABORATORY, CREATED_AT, UPDATED_AT
+              FROM WAREHOUSE
+             WHERE ID = ?
+            """;
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setLong(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return mapRow(rs);
+            }
+            throw new NotFoundException("Almoxarifado com ID " + id + " não encontrado.");
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao buscar almoxarifado", e);
+        }
+    }
+
+    @Override
+    public List<Warehouse> getAll() {
+        final String sql = """
+            SELECT ID, NM_WAREHOUSE, LABORATORY_ID_LABORATORY, CREATED_AT, UPDATED_AT
+              FROM WAREHOUSE
+            """;
+        List<Warehouse> warehouses = new ArrayList<>();
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                warehouses.add(mapRow(rs));
+            }
+            return warehouses;
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao buscar almoxarifados", e);
         }
     }
 
     public boolean existsById(Long id) {
-        final String sql = "SELECT 1 FROM WAREHOUSE WHERE ID = ?";
+        final String sql = "SELECT COUNT(*) FROM WAREHOUSE WHERE ID = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setLong(1, id);
-            try (ResultSet rs = ps.executeQuery()) {
-                return rs.next();
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
             }
+            return false;
         } catch (SQLException e) {
-            throw new RuntimeException("Erro ao verificar existência do warehouse " + id, e);
+            throw new RuntimeException("Erro ao verificar existência do almoxarifado", e);
         }
     }
 
-
-    private Warehouse map(ResultSet rs) throws SQLException {
-        Warehouse w = new Warehouse();
-        w.setId(rs.getLong("ID"));
-        w.setName(rs.getString("NAME"));
-        w.setAddress(rs.getString("ADDRESS"));
-        Timestamp c = rs.getTimestamp("CREATED_DATE");
-        Timestamp m = rs.getTimestamp("MODIFY_DATE");
-        w.setCreatedDate(c != null ? c.toLocalDateTime() : null);
-        w.setModifyDate(m != null ? m.toLocalDateTime() : null);
-        return w;
+    private Warehouse mapRow(ResultSet rs) throws SQLException {
+        Warehouse warehouse = new Warehouse();
+        warehouse.setId(rs.getLong("ID"));
+        warehouse.setName(rs.getString("NM_WAREHOUSE"));
+        warehouse.setLaboratoryId(rs.getLong("LABORATORY_ID_LABORATORY"));
+        warehouse.setCreatedDate(rs.getTimestamp("CREATED_AT").toLocalDateTime());
+        warehouse.setModifyDate(rs.getTimestamp("UPDATED_AT").toLocalDateTime());
+        return warehouse;
     }
 }

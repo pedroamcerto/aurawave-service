@@ -1,0 +1,1293 @@
+{
+	"info": {
+		"_postman_id": "aurawave-api-2025",
+		"name": "Aurawave API - Complete Collection",
+		"description": "Collection completa para testar todos os endpoints da API Aurawave",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Supplier",
+			"item": [
+				{
+					"name": "Create Supplier",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nmSupplier\": \"Fornecedor Teste LTDA\",\n  \"cpf\": \"12345678901\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/suppliers",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"suppliers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Suppliers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/suppliers",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"suppliers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Supplier by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/suppliers/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"suppliers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Supplier",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nmSupplier\": \"Fornecedor Atualizado LTDA\",\n  \"cpf\": \"12345678901\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/suppliers/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"suppliers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Supplier",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/suppliers/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"suppliers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Batch",
+			"item": [
+				{
+					"name": "Create Batch",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nmBatch\": \"Lote 2025-001\",\n  \"supplierId\": 1\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/batches",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"batches"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Batches",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/batches",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"batches"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Batch by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/batches/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"batches",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Batch",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nmBatch\": \"Lote 2025-001 Atualizado\",\n  \"supplierId\": 1\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/batches/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"batches",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Batch",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/batches/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"batches",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Manufacturer",
+			"item": [
+				{
+					"name": "Create Manufacturer",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nmManufacturer\": \"Samsung Electronics\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/manufacturers",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"manufacturers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Manufacturers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/manufacturers",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"manufacturers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Manufacturer by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/manufacturers/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"manufacturers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Manufacturer",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nmManufacturer\": \"Samsung Corporation\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/manufacturers/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"manufacturers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Manufacturer",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/manufacturers/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"manufacturers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Model",
+			"item": [
+				{
+					"name": "Create Model",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nmModel\": \"Galaxy S24\",\n  \"manufacturerId\": 1\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/models",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"models"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Models",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/models",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"models"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Model by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/models/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"models",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Model",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nmModel\": \"Galaxy S24 Ultra\",\n  \"manufacturerId\": 1\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/models/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"models",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Model",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/models/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"models",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Laboratory",
+			"item": [
+				{
+					"name": "Create Laboratory",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nmLaboratory\": \"Laboratório Central\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/laboratories",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"laboratories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Laboratories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/laboratories",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"laboratories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Laboratory by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/laboratories/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"laboratories",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Laboratory",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nmLaboratory\": \"Laboratório Principal\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/laboratories/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"laboratories",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Laboratory",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/laboratories/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"laboratories",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Warehouse",
+			"item": [
+				{
+					"name": "Create Warehouse",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Almoxarifado Norte\",\n  \"laboratoryId\": 1\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/warehouses",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"warehouses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Warehouses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/warehouses",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"warehouses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Warehouse by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/warehouses/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"warehouses",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Warehouse",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Almoxarifado Norte - Atualizado\",\n  \"laboratoryId\": 1\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/warehouses/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"warehouses",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Warehouse",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/warehouses/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"warehouses",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Item",
+			"item": [
+				{
+					"name": "Create Item",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nmItem\": \"Item Teste 001\",\n  \"status\": \"DISPONIVEL\",\n  \"modelId\": 1,\n  \"batchId\": 1\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/items",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Items",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/items",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Item by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/items/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"items",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Item",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nmItem\": \"Item Teste 001 - Atualizado\",\n  \"status\": \"EM_USO\",\n  \"modelId\": 1,\n  \"batchId\": 1\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/items/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"items",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Item",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/items/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"items",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Collaborator",
+			"item": [
+				{
+					"name": "Create Collaborator",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nmCollaborator\": \"João da Silva\",\n  \"codCompany\": \"EMP001\",\n  \"cpf\": \"12345678901\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/collaborators",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"collaborators"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Collaborators",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/collaborators",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"collaborators"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Collaborator by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/collaborators/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"collaborators",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Collaborator",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nmCollaborator\": \"João da Silva Santos\",\n  \"codCompany\": \"EMP001\",\n  \"cpf\": \"12345678901\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/collaborators/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"collaborators",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Collaborator",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/collaborators/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"collaborators",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Session",
+			"item": [
+				{
+					"name": "Create Session",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"start\": \"2025-10-29T08:00:00\",\n  \"end\": \"2025-10-29T18:00:00\",\n  \"warehouseId\": 1,\n  \"collaboratorId\": 1\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/sessions",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"sessions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Sessions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/sessions",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"sessions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Session by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/sessions/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"sessions",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Session",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"start\": \"2025-10-29T08:00:00\",\n  \"end\": \"2025-10-29T17:00:00\",\n  \"warehouseId\": 1,\n  \"collaboratorId\": 1\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/sessions/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"sessions",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Session",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/sessions/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"sessions",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Event",
+			"item": [
+				{
+					"name": "Create Event",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"eventType\": \"ENTRADA\",\n  \"event\": \"Item recebido\",\n  \"itemId\": 1\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/events",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Events",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/events",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Event by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/events/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"events",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Event",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"eventType\": \"SAIDA\",\n  \"event\": \"Item enviado\",\n  \"itemId\": 1\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/events/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"events",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Event",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/events/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"events",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Create Product",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Produto Teste\",\n  \"validityDate\": \"2026-12-31T23:59:59\",\n  \"warehouseId\": 1,\n  \"costPrice\": 99.90,\n  \"status\": \"ACTIVE\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/products",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/products",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/products/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"products",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Produto Atualizado\",\n  \"validityDate\": \"2026-12-31T23:59:59\",\n  \"warehouseId\": 1,\n  \"costPrice\": 119.90,\n  \"status\": \"ACTIVE\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/products/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"products",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/products/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"products",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

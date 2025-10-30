@@ -17,6 +17,7 @@
         private final WarehouseDao warehouseDao;
         private final ModelMapper mapper;
 
+        // Cria um registro de um almoxarifado
         public WarehouseResponseDto create(WarehouseRequestDto dto) {
             Warehouse wh = mapper.map(dto, Warehouse.class);
             Long id = warehouseDao.create(wh);
@@ -24,6 +25,7 @@
             return mapper.map(saved, WarehouseResponseDto.class);
         }
 
+        // Atualiza um registro de um almoxarifado
         public WarehouseResponseDto update(Long id, WarehouseRequestDto dto) {
             Warehouse wh = mapper.map(dto, Warehouse.class);
             warehouseDao.update(id, wh);
@@ -31,6 +33,7 @@
             return mapper.map(updated, WarehouseResponseDto.class);
         }
 
+        //
         public WarehouseResponseDto getById(Long id) {
             return mapper.map(warehouseDao.getById(id), WarehouseResponseDto.class);
         }

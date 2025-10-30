@@ -18,23 +18,17 @@ public class ProductDao implements DaoInterface<Product, Long> {
     private Connection connection;
 
     @Override
-    public Long create(Product p) {
+    public Long create(Product product) {
         final String sql = """
-            INSERT INTO PRODUCT
-                (NAME, VALIDITY_DATE, WAREHOUSE_ID, COST_PRICE, STATUS)
-            VALUES
-                (?, ?, ?, ?, ?)
+            INSERT INTO PRODUCT (NM_PRODUCT, VALIDITY_DATE, COST_PRICE, STATUS, WAREHOUSE_ID_WAREHOUSE)
+            VALUES (?, ?, ?, ?, ?)
             """;
         try (PreparedStatement ps = connection.prepareStatement(sql, new String[]{"ID"})) {
-            ps.setString(1, p.getName());
-            if (p.getValidityDate() != null)
-                ps.setTimestamp(2, Timestamp.valueOf(p.getValidityDate()));
-            else
-                ps.setNull(2, Types.TIMESTAMP);
-            ps.setLong(3, p.getWarehouseId());
-            ps.setBigDecimal(4, p.getCostPrice());
-            ps.setString(5, p.getStatus().name());
-
+            ps.setString(1, product.getName());
+            ps.setTimestamp(2, product.getValidityDate() != null ? Timestamp.valueOf(product.getValidityDate()) : null);
+            ps.setBigDecimal(3, product.getCostPrice());
+            ps.setString(4, product.getStatus() != null ? product.getStatus().name() : null);
+            ps.setLong(5, product.getWarehouseId());
             int rows = ps.executeUpdate();
             if (rows == 0) throw new SQLException("Insert falhou: nenhuma linha afetada.");
 
@@ -44,39 +38,31 @@ public class ProductDao implements DaoInterface<Product, Long> {
             throw new SQLException("Não foi possível recuperar a chave gerada (ID).");
         } catch (SQLException e) {
             if (e.getErrorCode() == 2291) {
-                throw new NotFoundException("Warehouse (warehouseId=" + p.getWarehouseId() + ") não encontrado para o produto.");
+                throw new NotFoundException("Warehouse (warehouseId=" + product.getWarehouseId() + ") não encontrado.");
             }
-            throw new RuntimeException("Erro ao criar produto", e);
+            throw new RuntimeException("Erro na criação do produto", e);
         }
     }
 
     @Override
-    public void update(Long id, Product p) {
+    public void update(Long id, Product product) {
         final String sql = """
             UPDATE PRODUCT
-               SET NAME = ?,
-                   VALIDITY_DATE = ?,
-                   WAREHOUSE_ID = ?,
-                   COST_PRICE = ?,
-                   STATUS = ?
+               SET NM_PRODUCT = ?, VALIDITY_DATE = ?, COST_PRICE = ?, STATUS = ?, WAREHOUSE_ID_WAREHOUSE = ?
              WHERE ID = ?
             """;
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setString(1, p.getName());
-            if (p.getValidityDate() != null)
-                ps.setTimestamp(2, Timestamp.valueOf(p.getValidityDate()));
-            else
-                ps.setNull(2, Types.TIMESTAMP);
-            ps.setLong(3, p.getWarehouseId());
-            ps.setBigDecimal(4, p.getCostPrice());
-            ps.setString(5, p.getStatus().name());
+            ps.setString(1, product.getName());
+            ps.setTimestamp(2, product.getValidityDate() != null ? Timestamp.valueOf(product.getValidityDate()) : null);
+            ps.setBigDecimal(3, product.getCostPrice());
+            ps.setString(4, product.getStatus() != null ? product.getStatus().name() : null);
+            ps.setLong(5, product.getWarehouseId());
             ps.setLong(6, id);
-
             int rows = ps.executeUpdate();
             if (rows == 0) throw new NotFoundException("Produto id " + id + " não encontrado");
         } catch (SQLException e) {
             if (e.getErrorCode() == 2291) {
-                throw new NotFoundException("Warehouse (warehouseId=" + p.getWarehouseId() + ") não encontrado para o produto.");
+                throw new NotFoundException("Warehouse (warehouseId=" + product.getWarehouseId() + ") não encontrado.");
             }
             throw new RuntimeException("Erro ao atualizar o produto " + id, e);
         }
@@ -85,8 +71,7 @@ public class ProductDao implements DaoInterface<Product, Long> {
     @Override
     public Product getById(Long id) {
         final String sql = """
-            SELECT ID, NAME, VALIDITY_DATE, WAREHOUSE_ID, COST_PRICE, STATUS,
-                   CREATED_DATE, MODIFY_DATE
+            SELECT ID, NM_PRODUCT, VALIDITY_DATE, COST_PRICE, STATUS, WAREHOUSE_ID_WAREHOUSE, CREATED_AT, UPDATED_AT
               FROM PRODUCT
              WHERE ID = ?
             """;
@@ -97,15 +82,14 @@ public class ProductDao implements DaoInterface<Product, Long> {
                 return map(rs);
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Erro ao buscar produto por id " + id, e);
+            throw new RuntimeException("Erro ao recuperar produto " + id, e);
         }
     }
 
     @Override
     public List<Product> getAll() {
         final String sql = """
-            SELECT ID, NAME, VALIDITY_DATE, WAREHOUSE_ID, COST_PRICE, STATUS,
-                   CREATED_DATE, MODIFY_DATE
+            SELECT ID, NM_PRODUCT, VALIDITY_DATE, COST_PRICE, STATUS, WAREHOUSE_ID_WAREHOUSE, CREATED_AT, UPDATED_AT
               FROM PRODUCT
              ORDER BY ID
             """;
@@ -115,7 +99,7 @@ public class ProductDao implements DaoInterface<Product, Long> {
             while (rs.next()) list.add(map(rs));
             return list;
         } catch (SQLException e) {
-            throw new RuntimeException("Erro ao recuperar os produtos", e);
+            throw new RuntimeException("Erro ao recuperar produtos", e);
         }
     }
 
@@ -134,19 +118,15 @@ public class ProductDao implements DaoInterface<Product, Long> {
     private Product map(ResultSet rs) throws SQLException {
         Product p = new Product();
         p.setId(rs.getLong("ID"));
-        p.setName(rs.getString("NAME"));
-
-        Timestamp v = rs.getTimestamp("VALIDITY_DATE");
-        p.setValidityDate(v != null ? v.toLocalDateTime() : null);
-
-        p.setWarehouseId(rs.getLong("WAREHOUSE_ID"));
+        p.setName(rs.getString("NM_PRODUCT"));
+        Timestamp validity = rs.getTimestamp("VALIDITY_DATE");
+        p.setValidityDate(validity != null ? validity.toLocalDateTime() : null);
         p.setCostPrice(rs.getBigDecimal("COST_PRICE"));
-
-        String st = rs.getString("STATUS");
-        p.setStatus(st != null ? ProductStatus.forValue(st) : null);
-
-        Timestamp c = rs.getTimestamp("CREATED_DATE");
-        Timestamp m = rs.getTimestamp("MODIFY_DATE");
+        String statusStr = rs.getString("STATUS");
+        p.setStatus(statusStr != null ? ProductStatus.valueOf(statusStr) : null);
+        p.setWarehouseId(rs.getLong("WAREHOUSE_ID_WAREHOUSE"));
+        Timestamp c = rs.getTimestamp("CREATED_AT");
+        Timestamp m = rs.getTimestamp("UPDATED_AT");
         p.setCreatedDate(c != null ? c.toLocalDateTime() : null);
         p.setModifyDate(m != null ? m.toLocalDateTime() : null);
         return p;

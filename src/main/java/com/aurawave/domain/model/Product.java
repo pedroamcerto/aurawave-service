@@ -1,10 +1,7 @@
 package com.aurawave.domain.model;
 
 import com.aurawave.domain.enumerated.ProductStatus;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -14,9 +11,10 @@ import java.time.LocalDateTime;
  * Herda os campos de auditoria de {@link Auditable}.
  */
 
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Product extends Auditable {
-
     private Long id;
     private String name;
     private LocalDateTime validityDate;
