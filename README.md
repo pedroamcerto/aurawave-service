@@ -113,23 +113,6 @@ Para testar abra e importe o arquivo [Collection](./Aurawave.postman_collection.
 
 ---
 
-## Requisitos Challenge
-<div id="requisitos"></div>
-
-
- Criação do projeto Java com todas as classess, atributos e em seusdevidospacotes, que deve estar de acordo com o Diagrama de 
-Classe e o projeto proposto.
-
-- [Projeto](src)
-
-
-Desenvolva no mínimo três métodos operacionais (diferentes dos getters & setters) que recebam algum parâmetro e retorne algum valor. Adicione Javadoc acima dos métodos para descrever a sua função, seus parâmetros e retorno. Desenvolva pelo menos um método com sobrecarga e outro com sobrescrita.
-
-- [Sobrecarga](./src/main/java/com/aurawave/service/ItemService.java)
-- [Sobrescrita](./src/main/java/com/aurawave/service)
-- [Métodos diferentes](./src/main/java/com/aurawave/domain/interfaces/ServiceInterface.java)
-- [Encapsulamento](./src/main/java/com/aurawave/domain/model)
-- [Encapsulamento](./src/main/java/com/aurawave/dto)
 
 **Obs:** A aplicação conta com JavaDoc nas principais classes e métodos, e também possui diversos outros métodos que contem requisitos como os descritos, fique a vontade para explorar o restante do projeto! :)
 
@@ -137,7 +120,7 @@ Desenvolva no mínimo três métodos operacionais (diferentes dos getters & sett
 
 Implemente uma classe com o método main para o usuário informar os valores para os objetos criados e depois exiba os valores dos atributos. Pode utilizar o Scanner ou JOptionPane.
 
-Conforme combinado com o professor, desenvolvemos a aplicação utilizando Spring. Para interagir com a aplicação, você pode realizar requisições HTTP. Além disso, disponibilizamos uma collection para facilitar os testes, evitando a necessidade de buscar manualmente os endpoints:  [Collection](./Aurawave.postman_collection.json) ou [Insomnia](./Insomnia_2025-09-08.yaml).
+Conforme combinado com o professor, desenvolvemos a aplicação utilizando Spring. Para interagir com a aplicação, você pode realizar requisições HTTP. Além disso, disponibilizamos uma collection para facilitar os testes, evitando a necessidade de buscar manualmente os endpoints:  [Collection](./Aurawave-API-Collection.postman_collection.json) 
 
 
 <br>
